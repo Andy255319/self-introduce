@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>김민승 - 포트폴리오 & 자기소개</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --border: #e2e8f0;
+      --badge-bg: #e0f2fe;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.8;
+      padding: 2.5rem 1rem;
+      display: flex;
+      justify-content: center;
+    }
+    .wrapper { width: 100%; max-width: 840px; display: flex; flex-direction: column; gap: 2.5rem; }
+    header {
+      background: var(--card-bg);
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    header h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; color: #0284c7; }
+    .hero-one-line { font-size: 1.15rem; font-weight: 600; color: var(--text-main); margin-bottom: 1rem; }
+    .contact-link {
+      display: inline-block;
+      font-size: 0.95rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      background: var(--badge-bg);
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+    }
+    .contact-link:hover { text-decoration: underline; }
+    
+    .card {
+      background: var(--card-bg);
+      padding: 2.2rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    .card h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.75rem;
+      color: #0f172a;
+    }
+    .story-body p { margin-bottom: 1.2rem; text-align: justify; word-break: keep-all; font-size: 1.02rem; }
+    .tag {
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--badge-bg);
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin-right: 0.4rem;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .stat-box {
+      background: #f1f5f9;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 0.25rem; }
+    .stat-label { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+    .stat-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+    
+    .project-item {
+      padding: 1.25rem;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+    .project-item h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+    .project-btn {
+      display: inline-block;
+      margin-top: 0.6rem;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ffffff;
+      background: var(--primary);
+      text-decoration: none;
+      border-radius: 6px;
+    }
+    .project-btn:hover { background: var(--primary-hover); }
+    .project-badge-pending {
+      display: inline-block;
+      margin-top: 0.6rem;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #64748b;
+      background: #e2e8f0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- 1. 첫 화면 (Hero) -->
+    <header>
+      <h1>김민승</h1>
+      <p class="hero-one-line">모르는 것을 솔직히 인정하고 밑바닥부터 핑을 뚫어내는 네트워크 엔지니어링 역량을 갖춘 사람</p>
+      <a class="contact-link" href="mailto:kkmmss040@gmail.com">kkmmss040@gmail.com</a>
+    </header>
+
+    <!-- 2. 본편 이야기 (Story) -->
+    <section class="card story-body">
+      <h2>내 이야기: 도구 가방을 다시 쥐기까지</h2>
+      <p>
+        <span class="tag">[고난과 방황]</span>
+        2020년 코로나19 비대면 원격수업 시절, 저는 사각 모니터 틀에 갇힌 채 무기력에 허덕였습니다. 1학년 내내 이어진 영문 에러 메시지와 건조한 수식 앞에서 어떤 흥미도 찾지 못했고, 2학년 1학기까지 학점은 흘러내렸습니다. 이 무기력의 악순환을 끊기 위해 육군 통신병으로 도망치듯 입대했습니다. 야전 통신 쉘터에서 회색 케이블 뭉치와 장비 껍데기를 처음 만지며 통신선로기능사와 지게차기능사를 취득했고 6개월간 전문하사 계급장을 달았습니다. 그러나 현실은 거창한 작전 지휘가 아닌 잡무였고, 주 광케이블이 끊긴 야간 비상 상황에서도 선임들의 등 뒤에서 무거운 도구 가방만 들고 서 있던 무기력한 조수였습니다.
+      </p>
+      <p>
+        <span class="tag">[자기조절력]</span>
+        무력감을 깨뜨린 계기는 수송부 정비창 두 달 파견이었습니다. 2022년 매캐한 배기가스 속에서 하사라는 알량한 체면을 내려놓고 수송부 병사들에게 렌치 쥐는 법을 물었습니다. 차 밑바닥에 누워 손수 오일 플러그를 풀고 필터를 교체하며 힘을 준 만큼 정직하게 볼트가 풀리는 물리적 인과의 성취감을 맛보았습니다. 이어진 안테나 통신 장애 삽질에서 선임의 무능 뒤에 숨어 '알아서 하겠지'라며 방관했던 저 자신의 무책임함을 뼈저리게 반성했습니다. 전역 후 대면 복학한 2학년 2학기에는 맥주집 알바의 피로 속에서도 토익 785점을 쟁취하며 스스로의 생활과 감정을 통제하는 자기조절력을 확립했습니다.
+      </p>
+      <p>
+        <span class="tag">[대인관계력]</span>
+        3학년 1학기, 4.02 학점을 방어하기 위해 자율주행 RC카 VNC 과제에서 AI가 뱉어낸 명령어 뒤에 숨어 우수상을 타냈던 부끄러운 요행을 겪었습니다. 이 껍데기의 죄책감을 털어내고자 부산 금정산을 땀 흘려 올랐고, 터키 이즈미르 야사르 대학 교환학생을 떠났습니다. 출국 전 인대 부상과 택시 사기, 캠퍼스 내 인간관계의 트러블을 거쳐 에게해 에페스의 폐허를 걸으며 타인의 시선이라는 감옥에서 벗어났습니다. 이스탄불에서 룸메이트와 구질구질한 감상 없이 쿨하게 작별했고, 이집트 아부심벨 사막 도로에서 현지 기사의 '인샬라'를 통해 통제 불가능한 변수 앞에서도 담담하게 타인을 대하고 중심을 지키는 단단한 대인관계력을 체득했습니다.
+      </p>
+      <p>
+        <span class="tag">[자기동기력과 현재]</span>
+        한국으로 돌아온 4학년, 더 이상 AI 뒤에 숨지 않겠다고 결심했습니다. 매주 화·목 저녁 학원 맨 앞자리에서 패킷트레이서 CLI 명령어와 라우팅 프로토콜을 노트에 빽빽하게 적어가며 마침내 터미널에 핑을 뚫어냈습니다. OPIc IH와 영문 CCNA 공식 자격증을 손에 쥐었고, 멘토의 추천을 받아 부산 SKT 알레프 부트캠프에 진입했습니다. 현재 부트캠프에서 타인과의 얄팍한 비교에 흔들리지 않고 매일 아침 리추얼과 네트워크 실습에 몰입하며, 어떤 장애가 닥쳐도 직접 도구를 꺼내 원인을 파고드는 진짜 엔지니어의 길을 걷고 있습니다.
+      </p>
+    </section>
+
+    <!-- 3. 숫자와 회복탄력성 (Evidence) -->
+    <section class="card">
+      <h2>지속력과 회복탄력성의 기록</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">부트캠프 출석률</div>
+          <div class="stat-desc">출처: 알레프 LMS '내 출석 기록'<br>비가 오거나 컨디션 난조인 날에도 단 하루의 결석 없이 부산 서면 강의실 자리를 끝까지 지켜낸 지속력</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">25일 연속</div>
+          <div class="stat-label">마음근력 리추얼 작성</div>
+          <div class="stat-desc">출처: 'ritual-history-2026-10-12.json'<br>매일 아침 호흡 명상과 동료 강점 관찰, 퇴근 전 성찰 기록을 누락 없이 축적한 자기통제력</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">11 / 11</div>
+          <div class="stat-label">과제 제출 완수</div>
+          <div class="stat-desc">출처: 알레프 LMS '내 제출 현황'<br>3만 자 소설부터 보안 방어전, 패킷 분석까지 주어진 모든 과업을 마감 시한 내 완수한 과제지속력</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 대표작 (Works) -->
+    <section class="card">
+      <h2>대표작 및 프로젝트</h2>
+      <div class="project-item">
+        <h3>10번 과제: LLM 로그 분석 및 보안 정책 연구 논문</h3>
+        <p style="font-size: 0.92rem; color: var(--text-muted);">대규모 네트워크 트래픽 로그 요약 및 이상탐지 자동화를 위한 프롬프트 엔지니어링과 정책 엔진 분석 연구</p>
+        <a class="project-btn" href="https://aiscript-six.vercel.app/" target="_blank" rel="noopener noreferrer">논문 읽기 (웹 배포본)</a>
+      </div>
+      <div class="project-item">
+        <h3>13번 과제: 네트워크 트러블슈팅 인터랙티브 웹 앱</h3>
+        <p style="font-size: 0.92rem; color: var(--text-muted);">실제 패킷 흐름 분석 및 라우터 방화벽 설정 시뮬레이션을 제공하는 기능성 웹 애플리케이션</p>
+        <span class="project-badge-pending">13번 과제 수행 후 배포 예정</span>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
