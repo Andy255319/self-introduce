@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:,">
-  <title>김민승 - 포트폴리오 & 자기소개</title>
+  <title>김민승 - 네트워크 설계 및 유지보수 포트폴리오</title>
   <style>
     :root {
       --bg: #f8fafc;
@@ -16,7 +17,13 @@
       --border: #e2e8f0;
       --badge-bg: #e0f2fe;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg);
@@ -26,17 +33,38 @@
       display: flex;
       justify-content: center;
     }
-    .wrapper { width: 100%; max-width: 840px; display: flex; flex-direction: column; gap: 2.5rem; }
+
+    .wrapper {
+      width: 100%;
+      max-width: 860px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
     header {
       background: var(--card-bg);
       padding: 2.5rem 2rem;
       border-radius: 16px;
       border: 1px solid var(--border);
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
       text-align: center;
     }
-    header h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; color: #0284c7; }
-    .hero-one-line { font-size: 1.15rem; font-weight: 600; color: var(--text-main); margin-bottom: 1rem; }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: #0284c7;
+    }
+
+    .hero-one-line {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+    }
+
     .contact-link {
       display: inline-block;
       font-size: 0.95rem;
@@ -47,15 +75,19 @@
       padding: 0.35rem 0.9rem;
       border-radius: 20px;
     }
-    .contact-link:hover { text-decoration: underline; }
-    
+
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+
     .card {
       background: var(--card-bg);
       padding: 2.2rem;
       border-radius: 16px;
       border: 1px solid var(--border);
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }
+
     .card h2 {
       font-size: 1.45rem;
       font-weight: 700;
@@ -64,45 +96,145 @@
       padding-bottom: 0.75rem;
       color: #0f172a;
     }
-    .story-body p { margin-bottom: 1.2rem; text-align: justify; word-break: keep-all; font-size: 1.02rem; }
+
+    .story-body p {
+      margin-bottom: 1.35rem;
+      text-align: justify;
+      word-break: keep-all;
+      font-size: 1.02rem;
+    }
+
     .tag {
       font-weight: 700;
       color: var(--primary);
       background: var(--badge-bg);
-      padding: 0.15rem 0.5rem;
+      padding: 0.2rem 0.55rem;
       border-radius: 6px;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       margin-right: 0.4rem;
     }
-    
+
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.25rem;
       margin-top: 1rem;
     }
+
     .stat-box {
       background: #f1f5f9;
       padding: 1.5rem;
       border-radius: 12px;
       border: 1px solid var(--border);
     }
-    .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 0.25rem; }
-    .stat-label { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
-    .stat-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
-    
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
     .project-item {
-      padding: 1.25rem;
+      padding: 1.5rem;
       background: #f8fafc;
       border: 1px solid var(--border);
       border-radius: 12px;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
-    .project-item h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+
+    .project-item.highlight {
+      border: 2px solid #bae6fd;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);
+    }
+
+    .project-item h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.45rem;
+      color: #0f172a;
+    }
+
+    .project-tag-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.5rem 0 0.85rem 0;
+    }
+
+    .tech-pill {
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: #e2e8f0;
+      color: #334155;
+      padding: 0.15rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    .tech-pill.primary {
+      background: var(--badge-bg);
+      color: var(--primary);
+    }
+
+    .project-img-container {
+      margin: 1rem 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+
+    .project-img-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.2s;
+    }
+
+    .project-img-container img:hover {
+      transform: scale(1.01);
+    }
+
+    .project-img-caption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 0.4rem 0.5rem;
+      background: #f1f5f9;
+      border-top: 1px solid var(--border);
+    }
+
+    .spec-list {
+      margin: 0.8rem 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #334155;
+    }
+
+    .spec-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .spec-list strong {
+      color: #0f172a;
+    }
+
     .project-btn {
       display: inline-block;
       margin-top: 0.6rem;
-      padding: 0.4rem 0.85rem;
+      padding: 0.45rem 0.95rem;
       font-size: 0.85rem;
       font-weight: 600;
       color: #ffffff;
@@ -110,67 +242,84 @@
       text-decoration: none;
       border-radius: 6px;
     }
-    .project-btn:hover { background: var(--primary-hover); }
-    .project-badge-pending {
-      display: inline-block;
-      margin-top: 0.6rem;
-      padding: 0.35rem 0.8rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #64748b;
-      background: #e2e8f0;
-      border-radius: 6px;
+
+    .project-btn:hover {
+      background: var(--primary-hover);
     }
   </style>
 </head>
+
 <body>
   <div class="wrapper">
     <!-- 1. 첫 화면 (Hero) -->
     <header>
       <h1>김민승</h1>
-      <p class="hero-one-line">모르는 것을 솔직히 인정하고 밑바닥부터 핑을 뚫어내는 네트워크 엔지니어링 역량을 갖춘 사람</p>
+      <p class="hero-one-line">L1 물리 배선부터 L3 이중화·IPsec VPN까지, 무중단 통신을 위해 밑바닥부터 파고드는 네트워크 엔지니어</p>
       <a class="contact-link" href="mailto:kkmmss040@gmail.com">kkmmss040@gmail.com</a>
     </header>
 
     <!-- 2. 본편 이야기 (Story) -->
     <section class="card story-body">
-      <h2>내 이야기: 도구 가방을 다시 쥐기까지</h2>
+      <h2>내 이야기: 현장의 기본기에서 무중단 엔터프라이즈 망 설계까지</h2>
       <p>
         <span class="tag">[고난과 출발점]</span>
-        스무 살 코로나19 비대면 학번 시절, 사각 모니터 너머로 쏟아지는 추상적인 수식과 에러 메시지 앞에서 뚜렷한 목표를 찾지 못한 채 방황했습니다. 2022년 7월 육군 통신병으로 입대했고, 뭐든 해보자 라는 마음으로 복무를 연장하여 2024년 1월 전문하사로 임관해 동년 7월까지 도합 2년간 복무했습니다. 야전 통신소와 통신 쉘터는 강의실과 달리 거대한 랙함과 회색 랜 케이블이 얽힌 거친 물리적 현장이었습니다. 당시에는 네트워크의 이론적 깊이가 부족했기에 거대한 군 통신망 앞에서 위축되기 쉬웠지만, 실무에서 작동하지 않는 네트워크는 어떤 변명도 통하지 않는다는 사실을 깨닫고 계급장 뒤에 숨기보다 현장 바닥에서부터 정직하게 부딪혀 배우기로 결심했습니다.
+        스무 살 코로나19 비대면 학번 시절, 사각 모니터 너머로 쏟아지는 추상적인 수식과 에러 메시지 앞에서 뚜렷한 목표를 찾지 못한 채 방황했습니다. 2022년 7월 육군 통신병으로 입대했고, 온몸으로
+        부딪혀보자는 각오로 복무를 연장해 2024년 1월 전문하사로 임관하여 총 2년간 야전 통신을 담당했습니다. 통신소와 통신 쉘터는 강의실과 달리 거대한 랙함과 회색 랜 케이블이 얽힌 거친 물리적
+        현장이었습니다. 실무에서 작동하지 않는 네트워크는 어떤 변명도 통하지 않는다는 사실을 체감하며, 계급장 뒤에 숨기보다 현장 바닥에서부터 정직하게 부딪혀 배우기로 결심했습니다.
       </p>
       <p>
-        <span class="tag">[자기조절력]</span>
-        하사관 복무 도중 수송부 파견을 간 적이 있습니다. 수송부에 대해 아는 것이 전무했던 전 하사라는 알량한 권위를 깨끗이 내려놓았습니다. 장비를 가장 잘 다루는 병사들에게 먼저 고개를 숙이고 공구 쥐는 법과 배선 구조를 물었습니다. 계급과 체면보다 중요한 것은 ‘망이든 차량이든 정상화하는 결과’였기 때문입니다. 또한 수송부 PC의 국방 인트라넷이 먹통이 되었을 때, 고가의 스위치 장비 고장을 의심하던 상황에서 선임의 말을 듣고 물리 계층(Layer 1)부터 점검했습니다. 오랜 시간 책상 뒷편에서 먼지를 뒤집어쓴 케이블을 확인한 후, 직접 피복을 벗겨내고 여덟 가닥 심선을 배열해 RJ-45 잭을 압착하여 VOIP 전화기와 PC 통신을 단숨에 정상화했습니다. 원인을 알 수 없던 한 달간의 안테나 장애 역시 방관자적 태도를 버리고 전파 간섭을 직접 검토하여 안테나를 3m 이설함으로써 완벽히 복원했습니다. 회선 추적기(트래커)로 수백 가닥 선더미 속 포트를 추적하고 ping과 tracert로 여단 간 통신 상태를 모니터링하며, 현장 네트워크 문제는 요행이 아닌 정직한 기본기와 집요함으로 해결된다는 원칙을 체득했습니다.
+        <span class="tag">[자기조절력: 현장 중심의 물리·데이터링크 계층 유지보수]</span>
+        하사 복무 도중 수송부 파견 당시, 장비를 가장 잘 다루는 병사들에게 먼저 고개를 숙이고 배선 구조와 공구 다루는 법을 배웠습니다. 계급보다 중요한 것은 '망이든 장비든 정상화하는 결과'였기
+        때문입니다. 수송부 PC의 인트라넷이 단절되었을 때, 고가 스위치 결함으로 단정 짓던 분위기 속에서 물리 계층(L1)부터 점검했습니다. 책상 뒤에서 노후화된 케이블을 확인한 뒤 직접 피복을 벗기고 여덟
+        가닥 심선을 정렬해 RJ-45 잭을 압착하여 단숨에 VoIP 전화기와 PC 통신을 정상화했습니다. 원인을 알 수 없던 한 달간의 안테나 전파 장애 역시 방관하지 않고 전파 간섭을 검토해 안테나를 3m
+        이설함으로써 완벽히 복원했습니다. 회선 추적기(트래커)로 수백 가닥 선더미 속 포트를 추적하고 ping과 tracert로 여단 간 통신 상태를 모니터링하며, 현장 네트워크 문제는 요행이 아닌 정직한
+        기본기와 집요함으로 해결된다는 원칙을 체득했습니다.
       </p>
       <p>
-        <span class="tag">[대인관계력]</span>
-        3학년 1학기 자율주행 RC카 캡스톤 프로젝트를 진행하며 팀원들과 협업할 때, 저는 깊은 고민 없이 AI 설정값에 의존해 VNC 통신 환경을 구축했습니다. 프로젝트는 교내 우수상을 받았지만, 원리를 제대로 이해하지 못한 채 발표 자료를 다듬는 역할에 머물렀던 제 모습은 팀 프로젝트에서 지식의 본질을 공유하지 못했다는 뼈아픈 부끄러움을 남겼습니다. 이 경험을 계기로 팀 안에서 단순히 그럴듯한 결과물을 내는 것보다, 각자의 역할을 투명하게 공유하고 서로의 기술적 밑천을 솔직하게 나누는 소통이 진짜 협업의 핵심임을 깨달았습니다. 이후 튀르키예 이즈미르 교환학생 시절과 그리스·이집트 여정을 거치며, 기숙사 내의 복잡한 인간관계 갈등과 낯선 이국땅의 변수 속에서도 감정 소모에 매몰되지 않고 상대방을 있는 그대로 존중하며 담백하게 거리를 지키는 법을 배웠습니다. 과도한 의존이나 겉치레 없이 각자의 역할을 존중하며 문제를 풀어나가는 이 태도는, 현재 다양한 배경의 팀원들과 팀 프로젝트를 진행하며 마찰 없이 목표에 몰입하게 만드는 유연한 대인관계력의 바탕이 되고 있습니다.
+        <span class="tag">[대인관계력과 협업: 투명한 기술 공유와 트러블슈팅 소통]</span>
+        과거 팀 프로젝트에서 깊은 이해 없이 툴에 의존했다가 제 기술적 밑천의 한계를 절감했던 경험과, 낯선 해외 환경에서 감정에 매몰되지 않고 서로의 영역을 존중하는 법을 배운 경험은 협업에 대한 저의
+        기준을 바꾸어 놓았습니다. 진짜 협업은 겉치레가 아니라 서로의 설정값과 장애 요소를 솔직하게 투명하게 공유하는 소통에서 시작된다는 점입니다. 이번 캡스톤 기업망 구축 프로젝트에서도 팀원들과 라우터,
+        스위치, DMZ 서버 구축 역할을 분담할 때, 각자의 CLI 인터페이스 매핑과 라우팅 정책을 실시간으로 투명하게 공유했습니다. 특히 백업 라우터 추가 후 주/보조 경로 간 VPN 터널 통신이 단절되는
+        예상치 못한 난관에 부딪혔을 때, 서로 책임을 전가하지 않고 토폴로지 패킷 흐름도를 함께 펼쳐놓고 디버깅을 주도했습니다. 서로의 실수를 포용하고 기술적 피드백을 담백하게 주고받는 소통을 통해 복잡한
+        다중 경로 환경에서도 팀의 몰입도를 극대화하여 무결점 망 구축을 이끌어냈습니다.
       </p>
       <p>
-        <span class="tag">[자기동기력과 현재]</span>
-        귀국 후 요행을 완전히 배제하고 네트워크 엔지니어링의 본질에 뛰어들었습니다. 매주 화·목 학원 실습에서 패킷트레이서로 CLI 인터페이스 설정, VLAN 분할, OSPF 라우팅 테이블 구성을 노트에 빽빽이 채워가며 실전 감각을 익혔고, 영문 CCNA와 OPIc IH를 취득했습니다. 현재 부산 SKT 알레프 부트캠프에서는 출석률 100%를 유지하며, Linux 환경에서 방화벽 기본 Drop 정책으로 막혀 있던 트래픽 포워딩 룰을 직접 수정하고 패킷 드롭의 근본 원인을 역추적해 해결하고 있습니다. 모르는 것은 솔직하게 인정하되, 원인을 찾을 때까지 끝까지 터미널을 붙잡고 핑(Ping)을 도달시키는 책임감 있는 네트워크 엔지니어가 되겠습니다.
+        <span class="tag">[자기동기력과 전문성: 엔터프라이즈 망 설계 및 실측 기반 유지보수]</span>
+        귀국 후 영문 CCNA와 OPIc IH를 취득하고, 부산 SKT 알레프 부트캠프에서 출석률 100%를 유지하며 실무 역량을 고도화했습니다. 특히 캡스톤 프로젝트에서는 단순한 연결을 넘어
+        <strong>고가용성(HA)과 다계층 보안을 갖춘 본사-지사 엔터프라이즈 인프라를 설계 및 구축</strong>했습니다. 사내 4개 부서의 IP를 VLSM(/27)으로 세분화해 IP 자원 낭비를
+        줄이고 Voice VLAN으로 음성 통화 품질을 보장했습니다. 본사-지사 간에는 AES/SHA 기반 IPsec Site-to-Site VPN 터널을 구축하고, HSRP(Priority 110/100,
+        Preempt) 가상 게이트웨이 이중화로 회선 장애 시에도 단절 없는 가용성을 확보했습니다. 이 과정에서 주·보조 라우터 간 크로스 통신 시 발생한 터널링 정체 현상을 Multi-Peer Crypto
+        Map과 ISP 라우팅 정합으로 해결했습니다. 또한 경계 방화벽의 상태 보존형(established) ACL과 DMZ 서버 Static NAT를 적용하여 외부 비인가 침입을 원천 차단했습니다. CLI
+        로그 실측을 통해 패킷 encaps/decaps 카운트 매칭과 SPI 대칭성을 직접 검증하며, 문제 발생 시 패킷 단위로 역추적해 기필코 핑을 도달시키는 엔지니어의 집요함을 증명하고 있습니다.
       </p>
     </section>
 
     <!-- 3. 숫자와 회복탄력성 (Evidence) -->
     <section class="card">
-      <h2>지속력과 회복탄력성의 기록</h2>
+      <h2>지속력과 엔지니어링 신뢰성의 기록</h2>
       <div class="stats-grid">
         <div class="stat-box">
           <div class="stat-value">100%</div>
           <div class="stat-label">부트캠프 출석률</div>
-          <div class="stat-desc">출처: 알레프 LMS '내 출석 기록'<br>비가 오거나 컨디션 난조인 날에도 단 하루의 결석 없이 부산 서면 강의실 자리를 끝까지 지켜낸 지속력</div>
+          <div class="stat-desc">출처: 알레프 LMS '내 출석 기록'<br>비가 오거나 컨디션 난조인 날에도 단 하루의 결석 없이 부산 서면 강의실 자리를 지켜낸 지속력</div>
         </div>
         <div class="stat-box">
           <div class="stat-value">25일 연속</div>
           <div class="stat-label">마음근력 리추얼 작성</div>
-          <div class="stat-desc">출처: 'ritual-history-2026-10-12.json'<br>매일 아침 호흡 명상과 동료 강점 관찰, 퇴근 전 성찰 기록을 누락 없이 축적한 자기통제력</div>
+          <div class="stat-desc">출처: 'ritual-history-2026-10-12.json'<br>매일 아침 호흡 명상과 동료 강점 관찰, 퇴근 전 성찰 기록을 누락 없이 축적한
+            자기통제력</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">100% 검증</div>
+          <div class="stat-label">암·복호화 패킷 정합률</div>
+          <div class="stat-desc">출처: 라우터 show crypto ipsec sa 실측 로그<br>본사-지사 간 IPsec VPN 터널에서 패킷 손실 0건, Inbound/Outbound
+            SPI 대칭성 완벽 검증</div>
         </div>
         <div class="stat-box">
           <div class="stat-value">11 / 11</div>
           <div class="stat-label">과제 제출 완수</div>
-          <div class="stat-desc">출처: 알레프 LMS '내 제출 현황'<br>3만 자 소설부터 보안 방어전, 패킷 분석까지 주어진 모든 과업을 마감 시한 내 완수한 과제지속력</div>
+          <div class="stat-desc">출처: 알레프 LMS '내 제출 현황'<br>보안 방어전, 가상화 패킷 분석, 엔터프라이즈 망 설계까지 주어진 모든 과업을 기한 내 완수한 과제지속력
+          </div>
         </div>
       </div>
     </section>
@@ -178,25 +327,90 @@
     <!-- 4. 대표작 (Works) -->
     <section class="card">
       <h2>대표작 및 프로젝트</h2>
-      <div class="project-item">
-        <h3>10번 과제: 가상화 네트워크 ICMP 지연 및 지터 실증 연구 논문</h3>
-        <p style="font-size: 0.92rem; color: var(--text-muted);">가상 브릿지 환경에서 페이로드 크기, 병렬 질의, 트래픽 경합이 RTT와 지터에 미치는 영향을 1,260회 실측 분석한 연구 논문</p>
-        <a class="project-btn" href="https://aiscript-six.vercel.app/" target="_blank" rel="noopener noreferrer">논문 읽기 (웹 배포본)</a>
+
+      <!-- 메인 캡스톤 프로젝트 카드 -->
+      <div class="project-item highlight">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+          <h3>[캡스톤] 본사-지사 고가용성(HA) 기업망 설계 및 다계층 보안 인프라 구축</h3>
+          <span
+            style="font-size: 0.85rem; font-weight: 700; color: #0284c7; background: #e0f2fe; padding: 0.2rem 0.6rem; border-radius: 4px;">네트워크
+            설계 및 유지보수 메인 프로젝트</span>
+        </div>
+        <p style="font-size: 0.95rem; color: #334155; margin-top: 0.35rem; font-weight: 600;">
+          공용 인터넷(ISP) 경유 본사(인사·보안)-지사(운영·개발) 간 고신뢰성 통신망 설계, HSRP 무중단 이중화, IPsec VPN 터널링 및 다계층 경계 방화벽(ACL·DMZ) 구축
+        </p>
+        <div class="project-tag-bar">
+          <span class="tech-pill primary">HSRP 이중화 (HA)</span>
+          <span class="tech-pill primary">Site-to-Site IPsec VPN</span>
+          <span class="tech-pill primary">VLSM Subnetting (/27)</span>
+          <span class="tech-pill">802.1Q Trunk & Voice VLAN</span>
+          <span class="tech-pill">Stateful ACL 방화벽</span>
+          <span class="tech-pill">Static NAT / DMZ 격리</span>
+          <span class="tech-pill">Dynamic PAT</span>
+          <span class="tech-pill">트러블슈팅 및 패킷 실측</span>
+        </div>
+
+        <div class="project-img-container">
+          <img src="assets/network-topology.jpg" alt="본사-지사 고가용성 기업망 네트워크 토폴로지 구성도">
+          <div class="project-img-caption">▲ 직접 설계 및 구축한 본사(HQ) - 지사(BRANCH) 고가용성 이중화 기업망 토폴로지 (Packet Tracer 실측 환경)
+          </div>
+        </div>
+
+        <ul class="spec-list">
+          <li>
+            <strong>L2/L3 스위칭 및 주소 설계:</strong> 사내 업무망을 VLSM <code>/27</code>(서브넷당 30호스트) 단위로 엄격히 분할하여 IP 낭비 방지 및 브로드캐스트
+            도메인 격리. Router-on-a-Stick 구조와 802.1Q 트렁킹, 음성 품질 보장을 위한 Voice VLAN 및 TFTP(Option 150) 분리 적용.
+          </li>
+          <li>
+            <strong>무중단 고가용성(HA) 게이트웨이 설계:</strong> 본사 및 지사에 각각 주 라우터와 보조 라우터를 배치하고, HSRP(Group 10~13, Priority 110/100,
+            Preempt) 가상 게이트웨이(VIP)를 구축하여 주 회선/장비 장애 발생 시 세션 단절 없는 무중단 자동 절체(Failover) 보장.
+          </li>
+          <li>
+            <strong>보안 터널링 및 Multi-Peer 트러블슈팅:</strong> 본사-지사 간 AES-128 / SHA-1 HMAC 기반 Site-to-Site IPsec VPN 수립. 이중화
+            라우터 추가 시 발생한 '주·보조 노선 간 VPN 통신 경로 비호환 문제'를 Multi-Peer Crypto Map 교차 지정 및 라우팅 경로 정합으로 해결하여 주-백업 간 크로스 페일오버 완벽
+            구현.
+          </li>
+          <li>
+            <strong>다계층 경계 방화벽 & DMZ 완충 지대:</strong> WAN 방화벽에 <code>established</code> 옵션을 적용한 상태 보존형(Stateful) 검사 모사
+            규칙을 적용하여 외부 비인가 스캔 차단(실측 차단 74건). 외부 공개 서버(웹/텔넷)는 Static NAT(1:1 포트포워딩)를 통해 DMZ로 격리하여 사내 업무망으로의 수평
+            이동(Lateral Movement) 원천 차단.
+          </li>
+          <li>
+            <strong>실측 로그 기반 유지보수 검증:</strong> <code>show crypto ipsec sa</code> 실측을 통해 본사-지사 간 암·복호화 패킷(encaps/decaps)
+            일치율 및 Inbound/Outbound SPI 대칭성을 확인하고, NAT 변환 테이블 추적 및 인터페이스 매핑 누락을 끝까지 디버깅하여 핑(Ping) 100% 도달 성공.
+          </li>
+        </ul>
       </div>
+
+      <!-- 기존 10번 과제 -->
       <div class="project-item">
-        <h3>13번 과제: KISA WHOIS & 가상화 네트워크 지연 진단 플랫폼</h3>
+        <h3>가상화 네트워크 ICMP 지연 및 지터 실증 연구 논문</h3>
+        <p style="font-size: 0.92rem; color: var(--text-muted);">가상 브릿지 환경에서 페이로드 크기, 병렬 질의, 트래픽 경합이 RTT와 지터에 미치는 영향을
+          1,260회 실측 분석한 연구 논문</p>
+        <a class="project-btn" href="https://aiscript-six.vercel.app/" target="_blank" rel="noopener noreferrer">논문 읽기
+          (웹 배포본)</a>
+      </div>
+
+      <!-- 기존 13번 과제 -->
+      <div class="project-item">
+        <h3>KISA WHOIS & 가상화 네트워크 지연 진단 플랫폼</h3>
         <p style="font-size: 0.92rem; color: #0284c7; font-weight: 600; margin-top: 0.25rem;">
-          "가상화 인프라를 운영하는 네트워크 엔지니어가 통신 지연 원인을 진단할 때, 이 앱이 패킷 크기·병렬 질의·트래픽 경합 3가지 조건에 따른 실제 RTT와 지터 변화를 시뮬레이션해 큐잉 병목을 판정해 준다."
+          "가상화 인프라를 운영하는 네트워크 엔지니어가 통신 지연 원인을 진단할 때, 이 앱이 패킷 크기·병렬 질의·트래픽 경합 3가지 조건에 따른 실제 RTT와 지터 변화를 시뮬레이션해 큐잉 병목을 판정해
+          준다."
         </p>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
           10번 논문 1,260회 실측 데이터 기반 RTT·지터 시뮬레이터 + 실시간 Traceroute 홉 분석 + 공공데이터포털 KISA WHOIS OpenAPI 서버리스 연동
         </p>
-        <div style="margin-top: 0.6rem; padding: 0.6rem 0.85rem; background: #f1f5f9; border-radius: 6px; font-size: 0.85rem; color: #475569;">
-          💬 <strong>동료의 한 줄 감상:</strong> "패킷 크기보다 트래픽 경합 시 수신 버퍼 큐잉이 지연 폭증의 진짜 원인이라는 논문의 핵심 결론이 시뮬레이터로 직관적으로 체감되고, 실제 경로 추적 및 KISA 공식 데이터까지 한눈에 조회할 수 있어 실무 활용도가 뛰어납니다."
+        <div
+          style="margin-top: 0.6rem; padding: 0.6rem 0.85rem; background: #f1f5f9; border-radius: 6px; font-size: 0.85rem; color: #475569;">
+          💬 <strong>동료의 한 줄 감상:</strong> "패킷 크기보다 트래픽 경합 시 수신 버퍼 큐잉이 지연 폭증의 진짜 원인이라는 논문의 핵심 결론이 시뮬레이터로 직관적으로 체감되고, 실제
+          경로 추적 및 KISA 공식 데이터까지 한눈에 조회할 수 있어 실무 활용도가 뛰어납니다."
         </div>
-        <a class="project-btn" href="https://app-two-cyan-81.vercel.app/" target="_blank" rel="noopener noreferrer">앱 실행하기 (배포 URL)</a>
+        <a class="project-btn" href="https://app-two-cyan-81.vercel.app/" target="_blank" rel="noopener noreferrer">앱
+          실행하기 (배포 URL)</a>
       </div>
     </section>
   </div>
 </body>
+
 </html>
