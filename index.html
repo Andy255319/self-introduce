@@ -281,9 +281,9 @@
       </p>
       <p>
         <span class="tag">[자기동기력과 전문성: 실제 기업 환경을 모사한 망 제작과 냉정한 원인 규명]</span>
-        귀국 후 영문 CCNA와 OPIc IH를 취득하고, 부산 SKT 알레프 부트캠프에서 출석률 100%를 유지하며 실무 역량을 고도화했습니다. 캡스톤 프로젝트에서는 <strong>실제 기업 고객사에 즉시 납품 가능한 수준의 고가용성·다계층 보안 기업망 인프라 제작을 총괄</strong>했습니다. 사내 4개 부서의 IP를 VLSM(/27)으로 세분화해 IP 낭비를 방지하고 Voice VLAN으로 음성 QoS를 보장했으며, 최소 권한 원칙에 입각한 <strong>화이트리스트 기반 방화벽(ACL) 정책</strong>과 외부 비인가 접근을 원천 차단하는 <strong>DMZ 서버 격리 및 Static NAT(1:1 포트포워딩)</strong>를 직접 설계·제작했습니다.
+        귀국 후 영문 CCNA와 OPIc IH를 취득하고, 부산 SKT 알레프 부트캠프에서 출석률 100%를 유지하며 실무 역량을 고도화했습니다. 캡스톤 프로젝트에서는 <strong>실제 기업 고객사에 즉시 납품 가능한 수준의 고가용성·다계층 보안 기업망 인프라 제작을 총괄</strong>했습니다. 사내 4개 부서의 IP를 VLSM(/27)으로 세분화해 IP 낭비를 방지하고, 라우터 전화기 설정(telephony-service)과 스위치 Voice VLAN을 연동하여 VoIP 전화기를 거쳐 연결된 업무용 PC의 데이터 통신(Ping 100% 도달)을 정상 확립했습니다. 또한 최소 권한 원칙에 입각한 <strong>화이트리스트 기반 방화벽(ACL) 정책</strong>과 외부 비인가 접근을 원천 차단하는 <strong>DMZ 서버 격리 및 Static NAT(1:1 포트포워딩)</strong>를 직접 설계·제작했습니다.
         <br><br>
-        무엇보다 작동 여부에만 만족하는 피상적인 태도를 버리고, 장애와 제약 앞에서 프로토콜 표준과 하드웨어 한계를 끝까지 냉정하게 파고들었습니다. 라우터 L3 포트 부족 시 NIM 확장 모듈이 L2 전용이라는 시뮬레이터 제약을 탓하기보다, 외부에 전용 2960 L2 스위치를 신설하고 SVI(Vlan 1)와 Static NAT를 정합하여 금융권 수준의 다계층 심층 방어(Defense in Depth) 구조로 DMZ를 완벽히 격리했습니다. 또한 메인 회선 장애 모의 시 백업 터널로의 절체(Failover)는 즉시 성공했으나 회선 복구 시 메인 노선 복귀(Failback)가 지연되는 현상을 맞닥뜨렸을 때, 이를 모호한 버그로 넘기지 않고 <strong>IPsec SA의 비선점형(Non-preemptive) RFC 표준 특성</strong>, 시뮬레이터 내 DPD(Dead Peer Detection) 미지원 한계, HSRP와 Crypto Map 간 비동기화가 복합 작용한 결과임을 정밀 기술 보고서로 규명했습니다. 나아가 실무 프로덕션 환경 전환을 위한 Cisco ISR 장비 및 IP SLA + DPD 기반 1초 이내 무중단 자동 원복 아키텍처까지 제언하며, 유지보수 엔지니어로서 근본 원인(Root Cause)을 끝까지 추적하는 냉철한 기술 집요함을 증명하고 있습니다.
+        무엇보다 망의 성공에만 취하지 않고, 실제 발생한 기술적 한계와 실패를 솔직하고 냉정하게 마주했습니다. 라우터 L3 포트 부족 시 NIM 확장 모듈이 L2 전용이라는 시뮬레이터 제약을 탓하기보다, 외부에 전용 2960 L2 스위치를 신설하고 SVI(Vlan 1)와 Static NAT를 정합하여 금융권 수준의 다계층 심층 방어(Defense in Depth) 구조로 DMZ를 완벽히 격리했습니다. 특히 본사-지사 간 통신 중 메인 노선 장애 발생 시 우회 노선(백업)으로의 연결은 이루어졌으나, <strong>메인 노선이 복구되어도 우회 노선에서 메인으로 정상 복구(Failback)되지 못하고 망 전체가 끊어지는 실질적인 한계</strong>를 직접 확인했습니다. 이를 숨기거나 모호한 버그로 넘기지 않고 기술 분석 보고서를 통해 끝까지 원인을 파고들었습니다. 그 결과 <strong>IPsec SA의 비선점형(Non-preemptive) RFC 표준 특성</strong>, 시뮬레이터 내 DPD(Dead Peer Detection) 미지원 한계, LAN 측 HSRP 상태와 WAN Crypto Map 간 비동기화로 인해 세션 캐시가 묶여 패킷 드롭이 유발된다는 근본 원인을 명확히 규명했습니다. 나아가 실무 환경(Production) 전환을 위해 Cisco ISR 장비 및 IP SLA + DPD, VTI 기반 무중단 자동 원복 아키텍처까지 대안으로 제언하며, 유지보수 엔지니어로서 한계를 솔직하게 인정하고 근본 원인(Root Cause)을 끝까지 추적하는 냉철한 기술 집요함을 증명하고 있습니다.
       </p>
     </section>
 
@@ -338,7 +338,7 @@
           <span class="tech-pill primary">HSRP 이중화 (HA)</span>
           <span class="tech-pill primary">Site-to-Site IPsec VPN</span>
           <span class="tech-pill">VLSM (/27)</span>
-          <span class="tech-pill">802.1Q Voice VLAN</span>
+          <span class="tech-pill">Voice VLAN & PC Ping 정상화</span>
           <span class="tech-pill">Stateful ACL 방화벽</span>
           <span class="tech-pill">Static NAT (1:1 포트포워딩)</span>
           <span class="tech-pill">냉정 기술분석 보고서</span>
@@ -352,7 +352,7 @@
 
         <ul class="spec-list">
           <li>
-            <strong>실제 기업 환경을 모사한 L2/L3 망 설계:</strong> 공용 인터넷(ISP)을 경유하는 본사(인사·보안)-지사(운영·개발) 4개 부서 체계로 구성. VLSM <code>/27</code>(서브넷당 30호스트) 단위로 분할하여 IP 낭비를 방지하고 브로드캐스트 도메인을 격리. Router-on-a-Stick 구조와 802.1Q 트렁킹, 음성 품질 보장을 위한 Voice VLAN 및 TFTP(Option 150) 분리 적용.
+            <strong>실제 기업 환경을 모사한 L2/L3 망 설계:</strong> 공용 인터넷(ISP)을 경유하는 본사(인사·보안)-지사(운영·개발) 4개 부서 체계로 구성. VLSM <code>/27</code>(서브넷당 30호스트) 단위로 분할하여 IP 낭비를 방지하고 브로드캐스트 도메인을 격리. Router-on-a-Stick 구조와 802.1Q 트렁킹 적용. 특히 라우터에 전화기 설정(telephony-service/Option 150)을 주입하고 스위치 포트에 Voice VLAN과 데이터 VLAN을 분리 구성하여, 비록 패킷 트레이서 상에서 전화기 자체 IP 할당에는 한계가 있었으나 전화기의 내장 스위치 포트를 경유하는 업무용 PC의 데이터 트래픽(Ping)은 100% 정상 통신하도록 L2/L3 환경을 완벽히 정합.
           </li>
           <li>
             <strong>화이트리스트 기반 방화벽(ACL) 정책 및 다계층 심층 방어:</strong> 최소 권한 원칙(Principle of Least Privilege)을 적용하여 인가된 트래픽만 허용하고 비인가 접근을 차단하는 화이트리스트 정책 수립(실측 차단 74건). WAN 경계에 <code>established</code> 옵션을 적용한 상태 보존형(Stateful) 검사 모사를 구현하고, 라우터 포트 한계를 전용 2960 L2 스위치 증설과 내부 SVI(Vlan 1) 및 Static NAT(1:1 포트포워딩)로 해결하여 사내 업무망 침투를 원천 차단하는 DMZ 완충 지대 완비.
@@ -361,10 +361,10 @@
             <strong>무중단 고가용성(HA) 게이트웨이 설계:</strong> 본사 및 지사에 각각 주 라우터와 보조 라우터를 배치하고, HSRP(Group 10~13, Priority 110/100, Preempt) 가상 게이트웨이(VIP)를 구축하여 주 회선/장비 장애 발생 시 세션 단절 없는 무중단 자동 절체(Failover) 보장.
           </li>
           <li>
-            <strong>보안 터널링 및 Multi-Peer 트러블슈팅:</strong> 본사-지사 간 AES-128 / SHA-1 HMAC 기반 Site-to-Site IPsec VPN 수립. 이중화 라우터 추가 시 발생한 '주·보조 노선 간 VPN 통신 경로 비호환 문제'를 Multi-Peer Crypto Map 교차 지정 및 라우팅 경로 정합으로 해결하여 주-백업 간 크로스 페일오버 완벽 구현.
+            <strong>보안 터널링 및 다중 피어 이중화 시도:</strong> 본사-지사 간 AES-128 / SHA-1 HMAC 기반 Site-to-Site IPsec VPN 수립. 주·보조 라우터 간 Multi-Peer Crypto Map 교차 설정을 통해 메인 노선 장애 발생 시 백업 터널로 우회 연결(Failover)하는 이중화 경로를 구성.
           </li>
           <li>
-            <strong>냉정한 기술 분석 보고서 (IPsec Failback 지연 규명 & 실무 제언):</strong> 메인 회선 장애 절체(Failover) 후 복구 시 메인 노선으로의 복귀(Failback)가 지연되는 현상을 단순 버그로 치부하지 않고, <strong>IPsec SA의 비선점형(Non-preemptive) RFC 표준 특성</strong>, 시뮬레이터의 DPD(Dead Peer Detection) 미지원 한계 및 HSRP와의 경로 비동기화를 정밀 분석 보고서로 규명. 향후 프로덕션 전환 시 Cisco ISR 장비 및 IP SLA + DPD 기반 무중단 자동 원복 아키텍처 제언.
+            <strong>냉정한 기술 분석 보고서 (Failback 단절 한계 솔직 규명 & 실무 대안 제언):</strong> 메인 노선 단선 시 우회 노선으로 절체는 성공했으나, <strong>메인 노선이 복구되어도 메인으로 정상 복귀하지 못하고 우회 노선 망까지 함께 끊어지는 시스템의 실질적 한계를 솔직하게 규명</strong>. 이를 얼버무리지 않고 기술 분석 보고서를 통해 <strong>IPsec SA의 비선점형(Non-preemptive) RFC 표준 특성</strong>, 패킷 트레이서 환경의 DPD(Dead Peer Detection) 미지원 한계, 그리고 LAN 측 HSRP 상태와 WAN Crypto Map 경로 간 비대칭 비동기화가 패킷 드롭의 근본 원인임을 정밀 분석. 나아가 실무 프로덕션 전환 시 단순 정적 맵 대신 Cisco ISR 장비 및 IP SLA + DPD, VTI 기반 무중단 자동 원복 아키텍처를 실질적 대안으로 제시.
           </li>
           <li>
             <strong>실측 로그 기반 유지보수 검증:</strong> <code>show crypto ipsec sa</code> 실측을 통해 본사-지사 간 암·복호화 패킷(encaps/decaps) 일치율 및 Inbound/Outbound SPI 대칭성을 확인하고, NAT 변환 테이블 추적 및 인터페이스 매핑 누락을 끝까지 디버깅하여 핑(Ping) 100% 도달 성공.
