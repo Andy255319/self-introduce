@@ -509,7 +509,7 @@
         </div>
 
         <div class="project-img-container" id="topologyTrigger" title="클릭하여 원본 및 구간별 상세 확대보기">
-          <img src="assets/network-topology.jpg" alt="Sentra 사내망 다계층 접근통제 시스템 - 본사-지사 고가용성 기업망 네트워크 토폴로지 구성도">
+          <img src="assets/network-topology.jpg?v=2" alt="Sentra 사내망 다계층 접근통제 시스템 - 본사-지사 고가용성 기업망 네트워크 토폴로지 구성도">
           <span class="zoom-badge">🔍 클릭하여 확대</span>
           <div class="project-img-caption">▲ 직접 전담 설계 및 구축한 본사(HQ) - 지사(BRANCH) 고가용성 이중화 기업망 토폴로지 (클릭 시 원본 및 구간별 확대)
           </div>
@@ -600,7 +600,7 @@
     <!-- 인터랙티브 패킷트레이서 캔버스 뷰포트 -->
     <div class="pt-viewport" id="ptViewport">
       <div class="pt-canvas" id="ptCanvas">
-        <img id="modalImg" src="assets/network-topology-hd.png" alt="Cisco Packet Tracer 엔터프라이즈 고해상도 토폴로지 구성도">
+        <img id="modalImg" src="assets/network-topology-hd.png?v=2" alt="Cisco Packet Tracer 엔터프라이즈 고해상도 토폴로지 구성도">
       </div>
     </div>
 
@@ -627,8 +627,8 @@
 
       if (!trigger || !modal || !viewport || !canvas) return;
 
-      const imgWidth = 2048;
-      const imgHeight = 856;
+      const imgWidth = 1603;
+      const imgHeight = 685;
 
       let scale = 1;
       let translateX = 0;
@@ -778,19 +778,19 @@
           if (target === "all") {
             fitToScreen();
           } else if (target === "wan") {
-            scale = 1.6;
+            scale = 1.4;
             translateX = 40;
-            translateY = (vh - 856 * scale) / 2;
+            translateY = (vh - 685 * scale) / 2;
             updateTransform(true);
           } else if (target === "branch") {
-            scale = 1.6;
-            translateX = vw - (2048 * scale) + 50;
+            scale = 1.4;
+            translateX = vw - (1603 * scale) + 20;
             translateY = 40;
             updateTransform(true);
           } else if (target === "hq") {
-            scale = 1.6;
-            translateX = vw - (2048 * scale) + 50;
-            translateY = vh - (856 * scale) - 40;
+            scale = 1.4;
+            translateX = vw - (1603 * scale) + 20;
+            translateY = vh - (685 * scale) - 30;
             updateTransform(true);
           }
         });
