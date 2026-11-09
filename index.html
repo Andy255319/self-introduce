@@ -406,7 +406,7 @@
         <div class="project-tag-bar">
           <span class="tech-pill primary">Cisco Packet Tracer 기업망 모사</span>
           <span class="tech-pill primary">네트워크 입력값 및 정책 설계</span>
-          <span class="tech-pill primary">화이트리스트 접근통제 (74건 차단)</span>
+          <span class="tech-pill primary">화이트리스트 접근통제(ACL)</span>
           <span class="tech-pill primary">HSRP 게이트웨이 이중화</span>
           <span class="tech-pill primary">본사-지사 IPsec VPN 구성</span>
           <span class="tech-pill">부서별 VLAN 및 서브넷(/27)</span>
@@ -428,7 +428,7 @@
             <strong>부서별 L2/L3 망 분리 및 연동:</strong> 본사(인사·보안)-지사(운영·개발) 4개 부서를 VLAN 10~13으로 분리하고, 보안 강화를 위해 기존 /24 대역을 <code>/27</code> 서브넷 단위로 축소하여 정적 IP 대역(192.168.100~130.0/27)을 할당. 스위치 트렁크 포트와 라우터 서브인터페이스로 부서망을 연동하고 Voice VLAN을 적용해, 전화기 내장 스위치 포트를 경유하는 업무용 PC의 데이터 트래픽(Ping 100%) 정상 도달을 확인.
           </li>
           <li>
-            <strong>화이트리스트 접근통제(ACL) 및 DMZ 구축 한계 분석:</strong> 외부 경계 방화벽에서 비인가 접근 74건을 실측 차단하고 <code>established</code> 기반 상태 보존형 수신을 구현. 단, DMZ 서버의 경우 라우터 포트 부족과 인터페이스 설정 문제로 외부 포트포워딩 접속이 실패(Request Timeout)함을 확인하였으며, 이를 DMZ 전용 스위치 추가 증설 및 우회 연결 방안으로 분석해 기술 보고서에 정리.
+            <strong>화이트리스트 접근통제(ACL) 및 DMZ 구축 한계 분석:</strong> 외부 경계 라우터에 Extended ACL 정책을 구성하여 인가되지 않은 외부 트래픽의 사내망 접근을 필터링. 단, DMZ 서버의 경우 라우터 포트 부족과 인터페이스 설정 문제로 외부 포트포워딩 접속이 실패(Request Timeout)함을 확인하였으며, 이를 DMZ 전용 스위치 추가 증설 및 우회 연결 방안으로 분석해 기술 보고서에 정리.
           </li>
           <li>
             <strong>HSRP 게이트웨이 이중화 설계:</strong> 본사·지사에 각각 주 라우터와 보조 라우터를 배치하고 HSRP(Priority 110/100, Preempt) 가상 게이트웨이를 구축. 주 라우터나 회선 장애 발생 시 보조 라우터가 게이트웨이 역할을 넘겨받아 통신이 유지되도록 자동 절체(Failover) 경로를 실측 검증.
