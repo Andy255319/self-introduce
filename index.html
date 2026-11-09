@@ -389,8 +389,8 @@
 
     .pt-canvas img {
       display: block;
-      width: 2160px;
-      height: 860px;
+      width: 2048px;
+      height: 856px;
       max-width: none;
       pointer-events: none;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
@@ -627,8 +627,8 @@
 
       if (!trigger || !modal || !viewport || !canvas) return;
 
-      const imgWidth = 2160;
-      const imgHeight = 860;
+      const imgWidth = 2048;
+      const imgHeight = 856;
 
       let scale = 1;
       let translateX = 0;
@@ -778,19 +778,19 @@
           if (target === "all") {
             fitToScreen();
           } else if (target === "wan") {
-            scale = 1.35;
-            translateX = 50;
-            translateY = (vh - 860 * scale) / 2;
+            scale = 1.6;
+            translateX = 40;
+            translateY = (vh - 856 * scale) / 2;
             updateTransform(true);
           } else if (target === "branch") {
-            scale = 1.35;
-            translateX = vw - (2160 * scale) + 50;
-            translateY = 30;
+            scale = 1.6;
+            translateX = vw - (2048 * scale) + 50;
+            translateY = 40;
             updateTransform(true);
           } else if (target === "hq") {
-            scale = 1.35;
-            translateX = vw - (2160 * scale) + 50;
-            translateY = vh - (860 * scale) - 30;
+            scale = 1.6;
+            translateX = vw - (2048 * scale) + 50;
+            translateY = vh - (856 * scale) - 40;
             updateTransform(true);
           }
         });
