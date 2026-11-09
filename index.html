@@ -282,70 +282,6 @@
       gap: 0.4rem;
     }
 
-    .pt-toolbar {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: #0f172a;
-      padding: 0.25rem 0.6rem;
-      border-radius: 8px;
-      border: 1px solid #334155;
-    }
-
-    .pt-btn {
-      background: #1e293b;
-      border: 1px solid #475569;
-      color: #f1f5f9;
-      font-size: 0.82rem;
-      font-weight: 600;
-      padding: 0.25rem 0.65rem;
-      border-radius: 4px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s;
-    }
-
-    .pt-btn:hover {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #ffffff;
-    }
-
-    .pt-zoom-level {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #94a3b8;
-      min-width: 48px;
-      text-align: center;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .pt-nav-tabs {
-      display: flex;
-      gap: 0.3rem;
-      margin-left: 0.4rem;
-    }
-
-    .pt-nav-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #cbd5e1;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .pt-nav-btn:hover {
-      background: rgba(2, 132, 199, 0.8);
-      color: #ffffff;
-      border-color: rgba(2, 132, 199, 0.8);
-    }
-
     .pt-close-btn {
       background: #ef4444;
       border: none;
@@ -572,26 +508,11 @@
   </div>
   <!-- 패킷트레이서 스타일 인터랙티브 작업공간 모달 -->
   <div id="imageModal" class="image-modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <!-- 상단 툴바 -->
+    <!-- 상단 헤더 -->
     <div class="pt-modal-header">
       <div class="pt-modal-title">
         <span>🌐</span>
-        <span>Cisco Packet Tracer 토폴로지 작업 공간 (고해상도 실시간 뷰어)</span>
-      </div>
-
-      <div class="pt-toolbar">
-        <button type="button" class="pt-btn" id="zoomOutBtn" title="축소 (−)">−</button>
-        <span class="pt-zoom-level" id="zoomLevelText">100%</span>
-        <button type="button" class="pt-btn" id="zoomInBtn" title="확대 (+)">+</button>
-        <button type="button" class="pt-btn" id="zoomFitBtn" title="화면 크기에 맞춤">↺ 맞춤</button>
-        <button type="button" class="pt-btn" id="zoomActualBtn" title="100% 원본 크기">1:1</button>
-
-        <div class="pt-nav-tabs">
-          <button type="button" class="pt-nav-btn" data-target="all" title="전체 보기">전체</button>
-          <button type="button" class="pt-nav-btn" data-target="wan" title="WAN 및 ISP 구간 바로가기">WAN·ISP</button>
-          <button type="button" class="pt-nav-btn" data-target="branch" title="지사(BRANCH) 바로가기">지사</button>
-          <button type="button" class="pt-nav-btn" data-target="hq" title="본사(HQ) 바로가기">본사</button>
-        </div>
+        <span>Cisco Packet Tracer 토폴로지 구성도 (고해상도 실시간 뷰어)</span>
       </div>
 
       <button type="button" class="pt-close-btn" id="modalCloseBtn" aria-label="닫기">✕ 닫기</button>
@@ -618,12 +539,6 @@
       const viewport = document.getElementById("ptViewport");
       const canvas = document.getElementById("ptCanvas");
       const closeBtn = document.getElementById("modalCloseBtn");
-      const zoomInBtn = document.getElementById("zoomInBtn");
-      const zoomOutBtn = document.getElementById("zoomOutBtn");
-      const zoomFitBtn = document.getElementById("zoomFitBtn");
-      const zoomActualBtn = document.getElementById("zoomActualBtn");
-      const zoomLevelText = document.getElementById("zoomLevelText");
-      const navBtns = document.querySelectorAll(".pt-nav-btn");
 
       if (!trigger || !modal || !viewport || !canvas) return;
 
@@ -645,9 +560,6 @@
           canvas.style.transition = "";
         }
         canvas.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-        if (zoomLevelText) {
-          zoomLevelText.textContent = `${Math.round(scale * 100)}%`;
-        }
       }
 
       function fitToScreen() {
@@ -738,64 +650,6 @@
         }
       });
 
-      // 툴바 확대/축소 버튼
-      if (zoomInBtn) {
-        zoomInBtn.addEventListener("click", function () {
-          const vw = viewport.clientWidth / 2;
-          const vh = viewport.clientHeight / 2;
-          const rect = viewport.getBoundingClientRect();
-          zoomToPoint(scale * 1.25, rect.left + vw, rect.top + vh, true);
-        });
-      }
-
-      if (zoomOutBtn) {
-        zoomOutBtn.addEventListener("click", function () {
-          const vw = viewport.clientWidth / 2;
-          const vh = viewport.clientHeight / 2;
-          const rect = viewport.getBoundingClientRect();
-          zoomToPoint(scale * 0.8, rect.left + vw, rect.top + vh, true);
-        });
-      }
-
-      if (zoomFitBtn) zoomFitBtn.addEventListener("click", fitToScreen);
-
-      if (zoomActualBtn) {
-        zoomActualBtn.addEventListener("click", function () {
-          const vw = viewport.clientWidth / 2;
-          const vh = viewport.clientHeight / 2;
-          const rect = viewport.getBoundingClientRect();
-          zoomToPoint(1.0, rect.left + vw, rect.top + vh, true);
-        });
-      }
-
-      // 구간별 빠른 이동 버튼
-      navBtns.forEach(btn => {
-        btn.addEventListener("click", function () {
-          const target = this.getAttribute("data-target");
-          const vw = viewport.clientWidth;
-          const vh = viewport.clientHeight;
-
-          if (target === "all") {
-            fitToScreen();
-          } else if (target === "wan") {
-            scale = 1.4;
-            translateX = 40;
-            translateY = (vh - 685 * scale) / 2;
-            updateTransform(true);
-          } else if (target === "branch") {
-            scale = 1.4;
-            translateX = vw - (1603 * scale) + 20;
-            translateY = 40;
-            updateTransform(true);
-          } else if (target === "hq") {
-            scale = 1.4;
-            translateX = vw - (1603 * scale) + 20;
-            translateY = vh - (685 * scale) - 30;
-            updateTransform(true);
-          }
-        });
-      });
-
       // 터치 스크린 지원 (핀치 줌 및 터치 드래그)
       let touchStartDist = 0;
       let touchStartScale = 1;
@@ -840,8 +694,18 @@
       document.addEventListener("keydown", function (e) {
         if (!modal.classList.contains("open")) return;
         if (e.key === "Escape") closeModal();
-        if (e.key === "+" || e.key === "=") { zoomInBtn && zoomInBtn.click(); }
-        if (e.key === "-" || e.key === "_") { zoomOutBtn && zoomOutBtn.click(); }
+        if (e.key === "+" || e.key === "=") {
+          const vw = viewport.clientWidth / 2;
+          const vh = viewport.clientHeight / 2;
+          const rect = viewport.getBoundingClientRect();
+          zoomToPoint(scale * 1.25, rect.left + vw, rect.top + vh, true);
+        }
+        if (e.key === "-" || e.key === "_") {
+          const vw = viewport.clientWidth / 2;
+          const vh = viewport.clientHeight / 2;
+          const rect = viewport.getBoundingClientRect();
+          zoomToPoint(scale * 0.8, rect.left + vw, rect.top + vh, true);
+        }
         if (e.key === "0" || e.key === "r" || e.key === "R") { fitToScreen(); }
         if (e.key === "ArrowLeft") { translateX += 60; updateTransform(); }
         if (e.key === "ArrowRight") { translateX -= 60; updateTransform(); }
