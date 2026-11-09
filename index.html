@@ -638,20 +638,14 @@
       <!-- 2. Snort 침입 탐지 시스템 트러블슈팅 카드 -->
       <div class="project-item">
         <h3>Snort 침입 탐지 시스템 트러블슈팅: 방화벽 정책 연동 및 JSON 빈 로그 해결</h3>
-        <p style="font-size: 0.95rem; color: #334155; margin-top: 0.45rem; line-height: 1.65;">
-          Snort 침입 탐지 시스템을 구축하고 보안 이벤트를 모니터링하던 중, 탐지 로그가 생성되지 않고 JSON 파일이 빈 상태로 남는 증상이 발생했습니다.
-          연결성을 확인하기 위해 <code>ping</code>으로 네트워크 도달을 확인한 뒤 <code>netstat -ant</code>로 웹 서비스(Apache) 포트의 정상 활성화를 확인했으나 로그는
-          여전히 비어 있었습니다.
-          이에 <code>snort.lua</code> 설정 파일과 <code>local rules</code> 탐지 규칙을 대조하며 트래픽 유입 경로를 점검한 결과, Snort가 방화벽 정책 연동을
-          기준으로 동작하도록 설정되어 있었으나 정작 방화벽에 실제 허용/차단 정책이 등록되지 않아 탐지 이벤트가 트리거되지 않았음을 규명했습니다.
-          누락된 방화벽 정책을 등록하여 보안 이벤트가 정상 감지되고 JSON 로그가 적재되는 것을 확인했습니다.
-          이 과정을 통해 개별 보안 도구의 룰셋뿐 아니라 네트워크 연결, 포트 상태, 상위 방화벽 정책 간의 의존성을 단계별로 추적해야 한다는 실무 트러블슈팅 절차를 체득했습니다.
+        <p style="font-size: 0.95rem; color: #334155; margin-top: 0.45rem; line-height: 1.65; word-break: keep-all;">
+          Snort 탐지 로그(JSON)가 생성되지 않는 문제가 있었고, 연결 상태(<code>ping</code>), 서비스 포트(<code>netstat</code>), 설정 파일(<code>snort.lua</code>), 탐지 룰(<code>local rules</code>), 방화벽 순으로 범위를 좁혀 점검했습니다. 그 결과 방화벽에 필요한 정책이 설정되어 있지 않은 것이 원인임을 확인했고, 제가 정책을 설정하자 Snort가 정상 동작했습니다. 개별 도구의 설정뿐 아니라 상위 방화벽 정책과의 의존성까지 단계별로 확인해야 한다는 점을 배웠습니다.
         </p>
         <div class="project-tag-bar" style="margin-top: 0.5rem;">
           <span class="tech-pill primary">Snort 3</span>
           <span class="tech-pill">snort.lua & Local Rules</span>
           <span class="tech-pill">netstat & 포트 진단</span>
-          <span class="tech-pill">방화벽 연동 정책 점검</span>
+          <span class="tech-pill">방화벽 정책 설정</span>
           <span class="tech-pill">JSON 로그 트러블슈팅</span>
         </div>
       </div>
