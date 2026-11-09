@@ -241,19 +241,18 @@
       border-top: 1px solid var(--border);
     }
 
-    /* 이미지 확대 모달 (Lightbox Modal) */
+    /* 패킷트레이서 스타일 인터랙티브 캔버스 모달 */
     .image-modal {
       display: none;
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(6px);
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
+      background: rgba(10, 15, 29, 0.94);
+      backdrop-filter: blur(8px);
+      flex-direction: column;
       opacity: 0;
       transition: opacity 0.2s ease;
+      user-select: none;
     }
 
     .image-modal.open {
@@ -261,107 +260,153 @@
       opacity: 1;
     }
 
-    .modal-close-btn {
-      position: fixed;
-      top: 1.25rem;
-      right: 1.5rem;
-      width: 2.8rem;
-      height: 2.8rem;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(255, 255, 255, 0.12);
+    .pt-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1.25rem;
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
       color: #ffffff;
-      font-size: 1.8rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-      transition: all 0.2s;
-      z-index: 10001;
-    }
-
-    .modal-close-btn:hover {
-      background: rgba(239, 68, 68, 0.85);
-      transform: scale(1.05);
-    }
-
-    .modal-content-wrap {
-      max-width: 95vw;
-      max-height: 92vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-shrink: 0;
       gap: 0.8rem;
-    }
-
-    .modal-view-tabs {
-      display: flex;
-      gap: 0.45rem;
-      background: rgba(30, 41, 59, 0.85);
-      padding: 0.35rem 0.5rem;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
       flex-wrap: wrap;
-      justify-content: center;
     }
 
-    .view-tab-btn {
-      background: transparent;
-      border: none;
-      color: #cbd5e1;
+    .pt-modal-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pt-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #0f172a;
+      padding: 0.25rem 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #334155;
+    }
+
+    .pt-btn {
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #f1f5f9;
       font-size: 0.82rem;
       font-weight: 600;
-      padding: 0.35rem 0.85rem;
-      border-radius: 20px;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
       cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .view-tab-btn:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .view-tab-btn.active {
-      color: #ffffff;
-      background: var(--primary);
-    }
-
-    .modal-img-box {
-      max-width: 92vw;
-      max-height: 75vh;
-      overflow: auto;
-      border-radius: 8px;
-      background: #0f172a;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.15s;
     }
 
-    .modal-img {
-      max-width: 92vw;
-      max-height: 75vh;
-      object-fit: contain;
-      cursor: zoom-in;
-      transition: transform 0.2s ease, max-width 0.2s ease;
-      background: #ffffff;
-      display: block;
+    .pt-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
     }
 
-    .modal-img.zoomed {
-      max-width: none;
-      max-height: none;
-      width: 1700px;
-      cursor: zoom-out;
-    }
-
-    .modal-guide {
-      font-size: 0.82rem;
+    .pt-zoom-level {
+      font-size: 0.8rem;
+      font-weight: 700;
       color: #94a3b8;
+      min-width: 48px;
       text-align: center;
-      letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pt-nav-tabs {
+      display: flex;
+      gap: 0.3rem;
+      margin-left: 0.4rem;
+    }
+
+    .pt-nav-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .pt-nav-btn:hover {
+      background: rgba(2, 132, 199, 0.8);
+      color: #ffffff;
+      border-color: rgba(2, 132, 199, 0.8);
+    }
+
+    .pt-close-btn {
+      background: #ef4444;
+      border: none;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .pt-close-btn:hover {
+      background: #dc2626;
+    }
+
+    .pt-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+      background-color: #ffffff;
+      background-image: 
+        linear-gradient(rgba(203, 213, 225, 0.35) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(203, 213, 225, 0.35) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .pt-viewport.grabbing {
+      cursor: grabbing;
+    }
+
+    .pt-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+      will-change: transform;
+      user-select: none;
+    }
+
+    .pt-canvas img {
+      display: block;
+      width: 2160px;
+      height: 860px;
+      max-width: none;
+      pointer-events: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+    }
+
+    .pt-modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 1.25rem;
+      background: #0f172a;
+      border-top: 1px solid #1e293b;
+      color: #94a3b8;
+      font-size: 0.78rem;
+      flex-shrink: 0;
     }
 
     .spec-list {
@@ -525,100 +570,284 @@
       </div>
     </section>
   </div>
-  <!-- 이미지 확대 모달 (Lightbox Modal) -->
+  <!-- 패킷트레이서 스타일 인터랙티브 작업공간 모달 -->
   <div id="imageModal" class="image-modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <button class="modal-close-btn" id="modalCloseBtn" aria-label="닫기">&times;</button>
-    <div class="modal-content-wrap">
-      <!-- 뷰 전환 탭 -->
-      <div class="modal-view-tabs" id="modalViewTabs">
-        <button type="button" class="view-tab-btn active" data-src="assets/network-topology.jpg">전체 구성도</button>
-        <button type="button" class="view-tab-btn" data-src="assets/topology-detail-wan.png">WAN·외부망 상세</button>
-        <button type="button" class="view-tab-btn" data-src="assets/topology-detail-core.png">라우터·DMZ 상세</button>
-        <button type="button" class="view-tab-btn" data-src="assets/topology-detail-access.png">부서별 단말 상세</button>
+    <!-- 상단 툴바 -->
+    <div class="pt-modal-header">
+      <div class="pt-modal-title">
+        <span>🌐</span>
+        <span>Cisco Packet Tracer 토폴로지 작업 공간 (고해상도 실시간 뷰어)</span>
       </div>
 
-      <!-- 모달 이미지 박스 -->
-      <div class="modal-img-box" id="modalImgBox">
-        <img id="modalImg" class="modal-img" src="assets/network-topology.jpg" alt="확대된 네트워크 토폴로지 구성도">
+      <div class="pt-toolbar">
+        <button type="button" class="pt-btn" id="zoomOutBtn" title="축소 (−)">−</button>
+        <span class="pt-zoom-level" id="zoomLevelText">100%</span>
+        <button type="button" class="pt-btn" id="zoomInBtn" title="확대 (+)">+</button>
+        <button type="button" class="pt-btn" id="zoomFitBtn" title="화면 크기에 맞춤">↺ 맞춤</button>
+        <button type="button" class="pt-btn" id="zoomActualBtn" title="100% 원본 크기">1:1</button>
+
+        <div class="pt-nav-tabs">
+          <button type="button" class="pt-nav-btn" data-target="all" title="전체 보기">전체</button>
+          <button type="button" class="pt-nav-btn" data-target="wan" title="WAN 및 ISP 구간 바로가기">WAN·ISP</button>
+          <button type="button" class="pt-nav-btn" data-target="branch" title="지사(BRANCH) 바로가기">지사</button>
+          <button type="button" class="pt-nav-btn" data-target="hq" title="본사(HQ) 바로가기">본사</button>
+        </div>
       </div>
 
-      <div class="modal-guide">🔍 이미지를 클릭하면 2배 확대 / 축소됩니다. 상단 탭을 눌러 구간별 고해상도 상세도를 볼 수 있습니다. (ESC로 닫기)</div>
+      <button type="button" class="pt-close-btn" id="modalCloseBtn" aria-label="닫기">✕ 닫기</button>
+    </div>
+
+    <!-- 인터랙티브 패킷트레이서 캔버스 뷰포트 -->
+    <div class="pt-viewport" id="ptViewport">
+      <div class="pt-canvas" id="ptCanvas">
+        <img id="modalImg" src="assets/network-topology-hd.png" alt="Cisco Packet Tracer 엔터프라이즈 고해상도 토폴로지 구성도">
+      </div>
+    </div>
+
+    <!-- 하단 상태 및 가이드 바 -->
+    <div class="pt-modal-footer">
+      <div>💡 <strong>조작 안내:</strong> 마우스 휠(확대/축소) · 드래그(상하좌우 자유 이동) · 더블클릭(확대 토글) · 방향키(이동)</div>
+      <div>단축키: ESC(닫기) · R/0(화면맞춤) · +/−(확대/축소)</div>
     </div>
   </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const modal = document.getElementById("imageModal");
-      const modalImg = document.getElementById("modalImg");
-      const closeBtn = document.getElementById("modalCloseBtn");
       const trigger = document.getElementById("topologyTrigger");
-      const tabBtns = document.querySelectorAll(".view-tab-btn");
+      const viewport = document.getElementById("ptViewport");
+      const canvas = document.getElementById("ptCanvas");
+      const closeBtn = document.getElementById("modalCloseBtn");
+      const zoomInBtn = document.getElementById("zoomInBtn");
+      const zoomOutBtn = document.getElementById("zoomOutBtn");
+      const zoomFitBtn = document.getElementById("zoomFitBtn");
+      const zoomActualBtn = document.getElementById("zoomActualBtn");
+      const zoomLevelText = document.getElementById("zoomLevelText");
+      const navBtns = document.querySelectorAll(".pt-nav-btn");
 
-      if (trigger && modal && modalImg) {
-        // 이미지 클릭 시 모달 열기
-        trigger.addEventListener("click", function () {
-          // 기본값인 전체 구성도로 리셋
-          resetModalView();
-          modal.classList.add("open");
-          modal.setAttribute("aria-hidden", "false");
-          document.body.style.overflow = "hidden"; // 배경 스크롤 방지
-        });
+      if (!trigger || !modal || !viewport || !canvas) return;
 
-        function resetModalView() {
-          tabBtns.forEach(b => b.classList.remove("active"));
-          const firstTab = tabBtns[0];
-          if (firstTab) firstTab.classList.add("active");
-          modalImg.src = "assets/network-topology.jpg";
-          modalImg.classList.remove("zoomed");
+      const imgWidth = 2160;
+      const imgHeight = 860;
+
+      let scale = 1;
+      let translateX = 0;
+      let translateY = 0;
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+
+      function updateTransform(smooth = false) {
+        if (smooth) {
+          canvas.style.transition = "transform 0.22s cubic-bezier(0.2, 0.9, 0.4, 1)";
+          setTimeout(() => { canvas.style.transition = ""; }, 230);
+        } else {
+          canvas.style.transition = "";
         }
-
-        // 모달 닫기 함수
-        function closeModal() {
-          modal.classList.remove("open");
-          modal.setAttribute("aria-hidden", "true");
-          modalImg.classList.remove("zoomed");
-          document.body.style.overflow = "";
+        canvas.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        if (zoomLevelText) {
+          zoomLevelText.textContent = `${Math.round(scale * 100)}%`;
         }
+      }
 
-        // 닫기 버튼 클릭
-        if (closeBtn) {
-          closeBtn.addEventListener("click", function (e) {
-            e.stopPropagation();
-            closeModal();
-          });
-        }
+      function fitToScreen() {
+        const vw = viewport.clientWidth;
+        const vh = viewport.clientHeight;
+        if (!vw || !vh) return;
 
-        // 배경 영역 클릭 시 닫기
-        modal.addEventListener("click", function (e) {
-          if (e.target === modal || e.target.classList.contains("modal-content-wrap") || e.target.classList.contains("modal-img-box")) {
-            closeModal();
-          }
-        });
+        const pad = 30;
+        const scaleX = (vw - pad * 2) / imgWidth;
+        const scaleY = (vh - pad * 2) / imgHeight;
+        scale = Math.min(scaleX, scaleY, 1.25);
+        scale = Math.max(scale, 0.35);
 
-        // 탭 버튼 클릭 시 이미지 교체
-        tabBtns.forEach(btn => {
-          btn.addEventListener("click", function (e) {
-            e.stopPropagation();
-            tabBtns.forEach(b => b.classList.remove("active"));
-            this.classList.add("active");
-            modalImg.src = this.getAttribute("data-src");
-            modalImg.classList.remove("zoomed");
-          });
-        });
+        translateX = (vw - imgWidth * scale) / 2;
+        translateY = (vh - imgHeight * scale) / 2;
+        updateTransform(true);
+      }
 
-        // 모달 내 이미지 클릭 시 2배 확대 / 축소 토글
-        modalImg.addEventListener("click", function (e) {
-          e.stopPropagation();
-          this.classList.toggle("zoomed");
-        });
+      function zoomToPoint(newScale, clientX, clientY, smooth = false) {
+        newScale = Math.min(Math.max(newScale, 0.35), 3.8);
+        const rect = viewport.getBoundingClientRect();
+        const mouseX = clientX - rect.left;
+        const mouseY = clientY - rect.top;
 
-        // ESC 키로 닫기
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "Escape" && modal.classList.contains("open")) {
-            closeModal();
-          }
+        // 마우스 커서 위치를 중심으로 줌 유지
+        translateX = mouseX - (mouseX - translateX) * (newScale / scale);
+        translateY = mouseY - (mouseY - translateY) * (newScale / scale);
+        scale = newScale;
+        updateTransform(smooth);
+      }
+
+      function openModal() {
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden"; // 배경 스크롤 방지
+        requestAnimationFrame(() => {
+          fitToScreen();
         });
       }
+
+      function closeModal() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      trigger.addEventListener("click", openModal);
+      if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+      // 마우스 드래그 (자유 이동)
+      viewport.addEventListener("mousedown", function (e) {
+        if (e.button !== 0) return;
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        viewport.classList.add("grabbing");
+        e.preventDefault();
+      });
+
+      window.addEventListener("mousemove", function (e) {
+        if (!isDragging) return;
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform(false);
+      });
+
+      window.addEventListener("mouseup", function () {
+        if (isDragging) {
+          isDragging = false;
+          viewport.classList.remove("grabbing");
+        }
+      });
+
+      // 마우스 휠 확대/축소 (패킷트레이서 휠 줌)
+      viewport.addEventListener("wheel", function (e) {
+        e.preventDefault();
+        const factor = e.deltaY < 0 ? 1.15 : 0.87;
+        zoomToPoint(scale * factor, e.clientX, e.clientY);
+      }, { passive: false });
+
+      // 더블 클릭 확대 토글
+      viewport.addEventListener("dblclick", function (e) {
+        e.preventDefault();
+        if (scale > 1.1) {
+          fitToScreen();
+        } else {
+          zoomToPoint(1.75, e.clientX, e.clientY, true);
+        }
+      });
+
+      // 툴바 확대/축소 버튼
+      if (zoomInBtn) {
+        zoomInBtn.addEventListener("click", function () {
+          const vw = viewport.clientWidth / 2;
+          const vh = viewport.clientHeight / 2;
+          const rect = viewport.getBoundingClientRect();
+          zoomToPoint(scale * 1.25, rect.left + vw, rect.top + vh, true);
+        });
+      }
+
+      if (zoomOutBtn) {
+        zoomOutBtn.addEventListener("click", function () {
+          const vw = viewport.clientWidth / 2;
+          const vh = viewport.clientHeight / 2;
+          const rect = viewport.getBoundingClientRect();
+          zoomToPoint(scale * 0.8, rect.left + vw, rect.top + vh, true);
+        });
+      }
+
+      if (zoomFitBtn) zoomFitBtn.addEventListener("click", fitToScreen);
+
+      if (zoomActualBtn) {
+        zoomActualBtn.addEventListener("click", function () {
+          const vw = viewport.clientWidth / 2;
+          const vh = viewport.clientHeight / 2;
+          const rect = viewport.getBoundingClientRect();
+          zoomToPoint(1.0, rect.left + vw, rect.top + vh, true);
+        });
+      }
+
+      // 구간별 빠른 이동 버튼
+      navBtns.forEach(btn => {
+        btn.addEventListener("click", function () {
+          const target = this.getAttribute("data-target");
+          const vw = viewport.clientWidth;
+          const vh = viewport.clientHeight;
+
+          if (target === "all") {
+            fitToScreen();
+          } else if (target === "wan") {
+            scale = 1.35;
+            translateX = 50;
+            translateY = (vh - 860 * scale) / 2;
+            updateTransform(true);
+          } else if (target === "branch") {
+            scale = 1.35;
+            translateX = vw - (2160 * scale) + 50;
+            translateY = 30;
+            updateTransform(true);
+          } else if (target === "hq") {
+            scale = 1.35;
+            translateX = vw - (2160 * scale) + 50;
+            translateY = vh - (860 * scale) - 30;
+            updateTransform(true);
+          }
+        });
+      });
+
+      // 터치 스크린 지원 (핀치 줌 및 터치 드래그)
+      let touchStartDist = 0;
+      let touchStartScale = 1;
+      viewport.addEventListener("touchstart", function (e) {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          startX = e.touches[0].clientX - translateX;
+          startY = e.touches[0].clientY - translateY;
+        } else if (e.touches.length === 2) {
+          isDragging = false;
+          touchStartDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          touchStartScale = scale;
+        }
+      }, { passive: true });
+
+      viewport.addEventListener("touchmove", function (e) {
+        if (e.touches.length === 1 && isDragging) {
+          translateX = e.touches[0].clientX - startX;
+          translateY = e.touches[0].clientY - startY;
+          updateTransform(false);
+        } else if (e.touches.length === 2 && touchStartDist > 0) {
+          const dist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+          const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+          const newScale = touchStartScale * (dist / touchStartDist);
+          zoomToPoint(newScale, midX, midY);
+        }
+      }, { passive: true });
+
+      viewport.addEventListener("touchend", function () {
+        isDragging = false;
+        touchStartDist = 0;
+      });
+
+      // 키보드 단축키
+      document.addEventListener("keydown", function (e) {
+        if (!modal.classList.contains("open")) return;
+        if (e.key === "Escape") closeModal();
+        if (e.key === "+" || e.key === "=") { zoomInBtn && zoomInBtn.click(); }
+        if (e.key === "-" || e.key === "_") { zoomOutBtn && zoomOutBtn.click(); }
+        if (e.key === "0" || e.key === "r" || e.key === "R") { fitToScreen(); }
+        if (e.key === "ArrowLeft") { translateX += 60; updateTransform(); }
+        if (e.key === "ArrowRight") { translateX -= 60; updateTransform(); }
+        if (e.key === "ArrowUp") { translateY += 60; updateTransform(); }
+        if (e.key === "ArrowDown") { translateY -= 60; updateTransform(); }
+      });
     });
   </script>
 </body>
