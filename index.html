@@ -241,6 +241,105 @@
       border-top: 1px solid var(--border);
     }
 
+    /* 실제 서비스 연동 화면 갤러리 카드 스타일 */
+    .live-screen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 0.85rem;
+    }
+
+    .live-screen-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: zoom-in;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .live-screen-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.12);
+      border-color: #93c5fd;
+    }
+
+    .live-screen-thumb {
+      position: relative;
+      background: #0f172a;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    .live-screen-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .live-screen-card:hover .live-screen-thumb img {
+      transform: scale(1.03);
+    }
+
+    .live-badge {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      backdrop-filter: blur(4px);
+    }
+
+    .live-badge-danger {
+      background: rgba(225, 29, 72, 0.9);
+      color: #ffffff;
+    }
+
+    .live-badge-warning {
+      background: rgba(217, 119, 6, 0.9);
+      color: #ffffff;
+    }
+
+    .live-badge-info {
+      background: rgba(2, 132, 199, 0.9);
+      color: #ffffff;
+    }
+
+    .live-badge-success {
+      background: rgba(16, 185, 129, 0.9);
+      color: #ffffff;
+    }
+
+    .live-screen-body {
+      padding: 0.85rem 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      background: #ffffff;
+    }
+
+    .live-screen-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .live-screen-desc {
+      font-size: 0.83rem;
+      color: #475569;
+      line-height: 1.55;
+    }
+
     /* 패킷트레이서 스타일 인터랙티브 캔버스 모달 */
     .image-modal {
       display: none;
@@ -447,6 +546,74 @@
           style="margin-top: 0.9rem; padding: 0.75rem 1rem; background: #f8fafc; border-left: 3px solid #3b82f6; border-radius: 6px; font-size: 0.88rem; color: #334155; line-height: 1.65; word-break: keep-all;">
           <strong style="color: #1e293b; margin-right: 0.35rem;">💡 역할 분담 및 정책 연동:</strong>본인이 설계한 부서별 사내망 대역(192.168.100~130.0/27)과 화이트리스트 정책 목록을 개발 팀원에게 전달했습니다. 팀원은 이를 서비스 접근 제어에 반영하여 비인가 대역에서도 서비스 페이지 접속은 가능하되 로그인을 차단하도록 구현하였고, 비인가 접근 시도시 보안관리자 모니터링 화면에 실시간 로그가 출력되도록 연동했습니다. 본인은 네트워크 입력값 설계와 인프라 시뮬레이션 검증을 전담했습니다.
         </div>
+
+        <!-- 실제 서비스 정책 연동 및 실시간 관제 검증 갤러리 -->
+        <div style="margin-top: 1.25rem; padding-top: 1.15rem; border-top: 1px dashed var(--border);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.4rem;">
+            <h4 style="font-size: 1.02rem; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 0.4rem; margin: 0;">
+              <span>🛡️</span> 실제 서비스 정책 연동 및 실시간 관제 검증 (Live System)
+            </h4>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">* 각 화면을 클릭하면 고해상도로 확대됩니다</span>
+          </div>
+
+          <div class="live-screen-grid">
+            <!-- 1. 미인가 IP 차단 모달 -->
+            <div class="live-screen-card" data-src="assets/sentra-ip-block-modal.png" data-title="미인가 IP 접근 통제 차단 모달 (Default-Deny L3/L4 Allowlist 불일치)">
+              <div class="live-screen-thumb">
+                <img src="assets/sentra-ip-block-modal.png" alt="미인가 IP 접근통제 차단 모달 화면">
+                <span class="live-badge live-badge-danger">ACCESS_DENIED</span>
+              </div>
+              <div class="live-screen-body">
+                <div class="live-screen-title">미인가 IP 접근 통제 차단 모달</div>
+                <div class="live-screen-desc">
+                  외부 비인가 IP에서 접속 시 <code>Default-Deny (L3/L4 Allowlist 불일치)</code>로 즉각 차단되며 사내 보안 VPN 켜짐 여부를 안내.
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. 보안 관리자 감사 로그 -->
+            <div class="live-screen-card" data-src="assets/sentra-admin-audit-log.png" data-title="보안 관리자 콘솔 - 실시간 접근 감사 로그 및 비인가 IP 탐지">
+              <div class="live-screen-thumb">
+                <img src="assets/sentra-admin-audit-log.png" alt="보안 관리자 콘솔 실시간 접근 감사 로그">
+                <span class="live-badge live-badge-warning">DENY (ip_not_allowed)</span>
+              </div>
+              <div class="live-screen-body">
+                <div class="live-screen-title">보안 관리자 실시간 관제 콘솔</div>
+                <div class="live-screen-desc">
+                  비인가 외부 IP(118.235.84.21) 접근 거부 이력이 실시간 적재되며, 상단 주의 알림 배너 연동 및 정상 사내 IP 이력을 실시간 대조.
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. 웹 패킷 시뮬레이터 -->
+            <div class="live-screen-card" data-src="assets/sentra-web-simulator.png" data-title="SENTRA / Packet Tracer 웹 토폴로지 시뮬레이터 (패킷 흐름 및 PDU 추적)">
+              <div class="live-screen-thumb">
+                <img src="assets/sentra-web-simulator.png" alt="토폴로지 기반 웹 시뮬레이터">
+                <span class="live-badge live-badge-info">토폴로지 시각화</span>
+              </div>
+              <div class="live-screen-body">
+                <div class="live-screen-title">토폴로지 기반 웹 시뮬레이터</div>
+                <div class="live-screen-desc">
+                  직접 설계한 본사-지사 이중화 토폴로지를 웹 상에 구현하여 VPN 캡슐화, L2 스위칭, IP 전화기 통과 등 홉별 PDU 흐름을 실시간 추적.
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. 사내망 로그인 및 역할 연동 -->
+            <div class="live-screen-card" data-src="assets/sentra-login-screen.png" data-title="SENTRA 사내망 다계층 접근통제 로그인 및 시연 계정 연동">
+              <div class="live-screen-thumb">
+                <img src="assets/sentra-login-screen.png" alt="사내망 접근통제 로그인 화면">
+                <span class="live-badge live-badge-success">운영 담당자 김민승</span>
+              </div>
+              <div class="live-screen-body">
+                <div class="live-screen-title">사내망 접근통제 로그인 화면</div>
+                <div class="live-screen-desc">
+                  본사·운영 담당자(김민승) 및 본사·보안 관리자 시연 계정이 연동되어 직군별 역할 기반 인가(RBAC) 환경을 제공.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- 2. Snort 침입 탐지 시스템 트러블슈팅 카드 -->
@@ -518,8 +685,8 @@
     <!-- 상단 헤더 -->
     <div class="pt-modal-header">
       <div class="pt-modal-title">
-        <span>🌐</span>
-        <span>Cisco Packet Tracer 토폴로지 구성도 (고해상도 실시간 뷰어)</span>
+        <span id="modalIcon">🌐</span>
+        <span id="modalTitleText">Cisco Packet Tracer 토폴로지 구성도 (고해상도 실시간 뷰어)</span>
       </div>
 
       <button type="button" class="pt-close-btn" id="modalCloseBtn" aria-label="닫기">✕ 닫기</button>
@@ -528,7 +695,7 @@
     <!-- 인터랙티브 패킷트레이서 캔버스 뷰포트 -->
     <div class="pt-viewport" id="ptViewport">
       <div class="pt-canvas" id="ptCanvas">
-        <img id="modalImg" src="assets/network-topology-hd.png?v=3" alt="Cisco Packet Tracer 엔터프라이즈 고해상도 토폴로지 구성도">
+        <img id="modalImg" src="assets/network-topology-hd.png?v=3" alt="고해상도 뷰어">
       </div>
     </div>
 
@@ -545,12 +712,15 @@
       const trigger = document.getElementById("topologyTrigger");
       const viewport = document.getElementById("ptViewport");
       const canvas = document.getElementById("ptCanvas");
+      const modalImg = document.getElementById("modalImg");
+      const modalTitleText = document.getElementById("modalTitleText");
+      const modalIcon = document.getElementById("modalIcon");
       const closeBtn = document.getElementById("modalCloseBtn");
 
-      if (!trigger || !modal || !viewport || !canvas) return;
+      if (!trigger || !modal || !viewport || !canvas || !modalImg) return;
 
-      const imgWidth = 1603;
-      const imgHeight = 685;
+      let currentImgWidth = 1603;
+      let currentImgHeight = 685;
 
       let scale = 1;
       let translateX = 0;
@@ -575,13 +745,13 @@
         if (!vw || !vh) return;
 
         const pad = 30;
-        const scaleX = (vw - pad * 2) / imgWidth;
-        const scaleY = (vh - pad * 2) / imgHeight;
+        const scaleX = (vw - pad * 2) / (currentImgWidth || 1603);
+        const scaleY = (vh - pad * 2) / (currentImgHeight || 685);
         scale = Math.min(scaleX, scaleY, 1.25);
         scale = Math.max(scale, 0.35);
 
-        translateX = (vw - imgWidth * scale) / 2;
-        translateY = (vh - imgHeight * scale) / 2;
+        translateX = (vw - (currentImgWidth || 1603) * scale) / 2;
+        translateY = (vh - (currentImgHeight || 685) * scale) / 2;
         updateTransform(true);
       }
 
@@ -598,13 +768,25 @@
         updateTransform(smooth);
       }
 
-      function openModal() {
+      function openModalWithImage(src, title, icon = "🖼️") {
+        modalImg.src = src;
+        if (modalTitleText) modalTitleText.textContent = title;
+        if (modalIcon) modalIcon.textContent = icon;
         modal.classList.add("open");
         modal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden"; // 배경 스크롤 방지
-        requestAnimationFrame(() => {
-          fitToScreen();
-        });
+
+        function refreshDimensions() {
+          currentImgWidth = modalImg.naturalWidth || 1603;
+          currentImgHeight = modalImg.naturalHeight || 685;
+          requestAnimationFrame(() => fitToScreen());
+        }
+
+        if (modalImg.complete && modalImg.naturalWidth > 0) {
+          refreshDimensions();
+        } else {
+          modalImg.onload = refreshDimensions;
+        }
       }
 
       function closeModal() {
@@ -613,7 +795,18 @@
         document.body.style.overflow = "";
       }
 
-      trigger.addEventListener("click", openModal);
+      trigger.addEventListener("click", function () {
+        openModalWithImage("assets/network-topology-hd.png?v=3", "Cisco Packet Tracer 토폴로지 구성도 (고해상도 실시간 뷰어)", "🌐");
+      });
+
+      document.querySelectorAll(".live-screen-card").forEach(function (card) {
+        card.addEventListener("click", function () {
+          const src = card.getAttribute("data-src");
+          const title = card.getAttribute("data-title");
+          openModalWithImage(src, title, "🛡️");
+        });
+      });
+
       if (closeBtn) closeBtn.addEventListener("click", closeModal);
 
       // 마우스 드래그 (자유 이동)
