@@ -189,11 +189,13 @@
     }
 
     .project-img-container {
+      position: relative;
       margin: 1rem 0;
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--border);
       background: #000;
+      cursor: zoom-in;
     }
 
     .project-img-container img {
@@ -203,8 +205,31 @@
       transition: transform 0.2s;
     }
 
-    .project-img-container img:hover {
+    .project-img-container:hover img {
       transform: scale(1.01);
+    }
+
+    .zoom-badge {
+      position: absolute;
+      bottom: 2.3rem;
+      right: 0.8rem;
+      background: rgba(15, 23, 42, 0.75);
+      color: #ffffff;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: background 0.2s;
+    }
+
+    .project-img-container:hover .zoom-badge {
+      background: rgba(2, 132, 199, 0.95);
     }
 
     .project-img-caption {
@@ -214,6 +239,129 @@
       padding: 0.4rem 0.5rem;
       background: #f1f5f9;
       border-top: 1px solid var(--border);
+    }
+
+    /* 이미지 확대 모달 (Lightbox Modal) */
+    .image-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .image-modal.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-close-btn {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: all 0.2s;
+      z-index: 10001;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(239, 68, 68, 0.85);
+      transform: scale(1.05);
+    }
+
+    .modal-content-wrap {
+      max-width: 95vw;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .modal-view-tabs {
+      display: flex;
+      gap: 0.45rem;
+      background: rgba(30, 41, 59, 0.85);
+      padding: 0.35rem 0.5rem;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .view-tab-btn {
+      background: transparent;
+      border: none;
+      color: #cbd5e1;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .view-tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .view-tab-btn.active {
+      color: #ffffff;
+      background: var(--primary);
+    }
+
+    .modal-img-box {
+      max-width: 92vw;
+      max-height: 75vh;
+      overflow: auto;
+      border-radius: 8px;
+      background: #0f172a;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-img {
+      max-width: 92vw;
+      max-height: 75vh;
+      object-fit: contain;
+      cursor: zoom-in;
+      transition: transform 0.2s ease, max-width 0.2s ease;
+      background: #ffffff;
+      display: block;
+    }
+
+    .modal-img.zoomed {
+      max-width: none;
+      max-height: none;
+      width: 1700px;
+      cursor: zoom-out;
+    }
+
+    .modal-guide {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      text-align: center;
+      letter-spacing: -0.01em;
     }
 
     .spec-list {
@@ -315,9 +463,10 @@
           <span class="tech-pill">기술 분석 보고서</span>
         </div>
 
-        <div class="project-img-container">
+        <div class="project-img-container" id="topologyTrigger" title="클릭하여 원본 및 구간별 상세 확대보기">
           <img src="assets/network-topology.jpg" alt="Sentra 사내망 다계층 접근통제 시스템 - 본사-지사 고가용성 기업망 네트워크 토폴로지 구성도">
-          <div class="project-img-caption">▲ 직접 전담 설계 및 구축한 본사(HQ) - 지사(BRANCH) 고가용성 이중화 기업망 토폴로지 (Packet Tracer 실측 환경)
+          <span class="zoom-badge">🔍 클릭하여 확대</span>
+          <div class="project-img-caption">▲ 직접 전담 설계 및 구축한 본사(HQ) - 지사(BRANCH) 고가용성 이중화 기업망 토폴로지 (클릭 시 원본 및 구간별 확대)
           </div>
         </div>
 
@@ -376,6 +525,102 @@
       </div>
     </section>
   </div>
+  <!-- 이미지 확대 모달 (Lightbox Modal) -->
+  <div id="imageModal" class="image-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="modal-close-btn" id="modalCloseBtn" aria-label="닫기">&times;</button>
+    <div class="modal-content-wrap">
+      <!-- 뷰 전환 탭 -->
+      <div class="modal-view-tabs" id="modalViewTabs">
+        <button type="button" class="view-tab-btn active" data-src="assets/network-topology.jpg">전체 구성도</button>
+        <button type="button" class="view-tab-btn" data-src="assets/topology-detail-wan.png">WAN·외부망 상세</button>
+        <button type="button" class="view-tab-btn" data-src="assets/topology-detail-core.png">라우터·DMZ 상세</button>
+        <button type="button" class="view-tab-btn" data-src="assets/topology-detail-access.png">부서별 단말 상세</button>
+      </div>
+
+      <!-- 모달 이미지 박스 -->
+      <div class="modal-img-box" id="modalImgBox">
+        <img id="modalImg" class="modal-img" src="assets/network-topology.jpg" alt="확대된 네트워크 토폴로지 구성도">
+      </div>
+
+      <div class="modal-guide">🔍 이미지를 클릭하면 2배 확대 / 축소됩니다. 상단 탭을 눌러 구간별 고해상도 상세도를 볼 수 있습니다. (ESC로 닫기)</div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImg");
+      const closeBtn = document.getElementById("modalCloseBtn");
+      const trigger = document.getElementById("topologyTrigger");
+      const tabBtns = document.querySelectorAll(".view-tab-btn");
+
+      if (trigger && modal && modalImg) {
+        // 이미지 클릭 시 모달 열기
+        trigger.addEventListener("click", function () {
+          // 기본값인 전체 구성도로 리셋
+          resetModalView();
+          modal.classList.add("open");
+          modal.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden"; // 배경 스크롤 방지
+        });
+
+        function resetModalView() {
+          tabBtns.forEach(b => b.classList.remove("active"));
+          const firstTab = tabBtns[0];
+          if (firstTab) firstTab.classList.add("active");
+          modalImg.src = "assets/network-topology.jpg";
+          modalImg.classList.remove("zoomed");
+        }
+
+        // 모달 닫기 함수
+        function closeModal() {
+          modal.classList.remove("open");
+          modal.setAttribute("aria-hidden", "true");
+          modalImg.classList.remove("zoomed");
+          document.body.style.overflow = "";
+        }
+
+        // 닫기 버튼 클릭
+        if (closeBtn) {
+          closeBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            closeModal();
+          });
+        }
+
+        // 배경 영역 클릭 시 닫기
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal || e.target.classList.contains("modal-content-wrap") || e.target.classList.contains("modal-img-box")) {
+            closeModal();
+          }
+        });
+
+        // 탭 버튼 클릭 시 이미지 교체
+        tabBtns.forEach(btn => {
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            tabBtns.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+            modalImg.src = this.getAttribute("data-src");
+            modalImg.classList.remove("zoomed");
+          });
+        });
+
+        // 모달 내 이미지 클릭 시 2배 확대 / 축소 토글
+        modalImg.addEventListener("click", function (e) {
+          e.stopPropagation();
+          this.classList.toggle("zoomed");
+        });
+
+        // ESC 키로 닫기
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && modal.classList.contains("open")) {
+            closeModal();
+          }
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
