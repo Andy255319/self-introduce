@@ -617,17 +617,17 @@
               </div>
             </div>
 
-            <!-- 4. 사내망 로그인 및 역할 연동 -->
-            <div class="live-screen-card" data-src="assets/sentra-login-screen.png"
-              data-title="SENTRA 사내망 다계층 접근통제 로그인 및 시연 계정 연동">
+            <!-- 4. DMZ 서버 정적 NAT 통신 검증 -->
+            <div class="live-screen-card" data-src="assets/sentra-dmz-nat-simulation.png"
+              data-title="외부망(Google) - 본사 DMZ 서버 간 정적 NAT(포트포워딩) 통신 검증">
               <div class="live-screen-thumb">
-                <img src="assets/sentra-login-screen.png" alt="사내망 접근통제 로그인 화면">
-                <span class="live-badge live-badge-success">운영 담당자 김민승</span>
+                <img src="assets/sentra-dmz-nat-simulation.png" alt="DMZ 서버 정적 NAT 웹 통신 시뮬레이션">
+                <span class="live-badge live-badge-success">정적 NAT (포트포워딩)</span>
               </div>
               <div class="live-screen-body">
-                <div class="live-screen-title">사내망 접근통제 로그인 화면</div>
+                <div class="live-screen-title">DMZ 서버 정적 NAT 통신 검증</div>
                 <div class="live-screen-desc">
-                  본사·운영 담당자(김민승) 및 본사·보안 관리자 시연 계정이 연동되어 직군별 역할 기반 인가(RBAC) 환경을 제공.
+                  외부(Google 8.8.8.8)에서 본사 공인 IP(1.1.1.1)를 통한 DMZ 웹서버(80) 요청 시 정적 NAT 역변환과 L2 스위칭을 거쳐 TCP SYN-ACK 양방향 통신 성공을 검증.
                 </div>
               </div>
             </div>
