@@ -424,8 +424,8 @@
 
     .pt-canvas img {
       display: block;
-      width: 2048px;
-      height: 856px;
+      width: auto;
+      height: auto;
       max-width: none;
       pointer-events: none;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
@@ -770,21 +770,21 @@
       function fitToScreen() {
         const vw = viewport.clientWidth;
         const vh = viewport.clientHeight;
-        if (!vw || !vh) return;
+        if (!vw || !vh || !currentImgWidth || !currentImgHeight) return;
 
-        const pad = 30;
-        const scaleX = (vw - pad * 2) / (currentImgWidth || 1603);
-        const scaleY = (vh - pad * 2) / (currentImgHeight || 685);
-        scale = Math.min(scaleX, scaleY, 1.25);
-        scale = Math.max(scale, 0.35);
+        const pad = 36;
+        const scaleX = (vw - pad * 2) / currentImgWidth;
+        const scaleY = (vh - pad * 2) / currentImgHeight;
+        scale = Math.min(scaleX, scaleY, 1.0);
+        scale = Math.max(scale, 0.15);
 
-        translateX = (vw - (currentImgWidth || 1603) * scale) / 2;
-        translateY = (vh - (currentImgHeight || 685) * scale) / 2;
+        translateX = (vw - currentImgWidth * scale) / 2;
+        translateY = (vh - currentImgHeight * scale) / 2;
         updateTransform(true);
       }
 
       function zoomToPoint(newScale, clientX, clientY, smooth = false) {
-        newScale = Math.min(Math.max(newScale, 0.35), 3.8);
+        newScale = Math.min(Math.max(newScale, 0.15), 4.5);
         const rect = viewport.getBoundingClientRect();
         const mouseX = clientX - rect.left;
         const mouseY = clientY - rect.top;
@@ -807,6 +807,8 @@
         function refreshDimensions() {
           currentImgWidth = modalImg.naturalWidth || 1603;
           currentImgHeight = modalImg.naturalHeight || 685;
+          modalImg.style.width = currentImgWidth + "px";
+          modalImg.style.height = currentImgHeight + "px";
           requestAnimationFrame(() => fitToScreen());
         }
 
@@ -939,6 +941,13 @@
         if (e.key === "ArrowRight") { translateX -= 60; updateTransform(); }
         if (e.key === "ArrowUp") { translateY += 60; updateTransform(); }
         if (e.key === "ArrowDown") { translateY -= 60; updateTransform(); }
+      });
+
+      // 브라우저 창 크기 변경 시 자동 재맞춤
+      window.addEventListener("resize", function () {
+        if (modal.classList.contains("open")) {
+          fitToScreen();
+        }
       });
     });
   </script>
