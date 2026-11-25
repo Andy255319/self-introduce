@@ -500,15 +500,15 @@
             프로젝트 (3인: 네트워크 인프라 전담 / FE 1 / BE 1)</span>
         </div>
         <p style="font-size: 0.95rem; color: #334155; margin-top: 0.45rem; font-weight: 600; line-height: 1.6;">
-          기업 환경을 모사한 사내망 인프라 토폴로지를 설계하고, 화이트리스트 접근통제, HSRP 게이트웨이 이중화, 본사-지사 간 VPN 망 구성 및 DMZ 구현 한계 분석을 수행한 프로젝트입니다. 네트워크
-          대역·정책을 설계해 전달했고, 팀원이 이를 서비스 IP 허용 목록과 클라우드 방화벽에 반영했습니다. 구현은 팀원 담당이며, 본인은 입력값 설계와 네트워크 검증을 맡았습니다.
+          기업 환경을 모사한 고신뢰성 사내망 인프라를 설계하고, 화이트리스트 접근통제, HSRP 게이트웨이 이중화, Site-to-Site IPsec VPN 및 DMZ 포트포워딩을 구축·검증한 프로젝트입니다. 캡스톤 당시 겪었던 장애와 한계에 머무르지 않고, 프로젝트 이후 L2/L3 심층 트러블슈팅을 통해 DMZ 외부 서비스를 100% 정상화하고 백업 VPN 우회 절체 성공 및 시뮬레이터 제약(DPD) 규명까지 완수했습니다. 네트워크 입력값 설계와 인프라 전 구간 검증을 전담했습니다.
         </p>
         <div class="project-tag-bar">
           <span class="tech-pill primary">Cisco Packet Tracer 기업망 모사</span>
-          <span class="tech-pill primary">네트워크 입력값 및 정책 설계</span>
-          <span class="tech-pill primary">화이트리스트 접근통제(ACL)</span>
-          <span class="tech-pill primary">HSRP 게이트웨이 이중화</span>
-          <span class="tech-pill primary">본사-지사 IPsec VPN 구성</span>
+          <span class="tech-pill primary">HSRP 게이트웨이 무중단 이중화</span>
+          <span class="tech-pill primary">Site-to-Site IPsec VPN (Multi-Peer)</span>
+          <span class="tech-pill primary">L2/L3 SVI DMZ 포트포워딩</span>
+          <span class="tech-pill primary">Dynamic PAT & NAT Exemption</span>
+          <span class="tech-pill primary">네트워크 장애 절체(Failover) 분석</span>
         </div>
 
         <div class="project-img-container" id="topologyTrigger" title="클릭하여 원본 및 구간별 상세 확대보기">
@@ -520,32 +520,22 @@
 
         <ul class="spec-list">
           <li>
-            <strong>부서별 L2/L3 망 분리 및 연동:</strong> 본사(인사·보안)-지사(운영·개발) 4개 부서를 VLAN 10~13으로 분리하고, 보안 강화를 위해 기존 /24 대역을
-            <code>/27</code> 서브넷 단위로 축소하여 정적 IP 대역(192.168.100~130.0/27)을 할당. 스위치 트렁크 포트와 라우터 서브인터페이스로 부서망을 연동하고 Voice
-            VLAN을 적용해, 전화기 내장 스위치 포트를 경유하는 업무용 PC의 데이터 트래픽(Ping 100%) 정상 도달을 확인.
+            <strong>부서별 L2/L3 망 분리 및 연동:</strong> 본사(인사·보안)-지사(운영·개발) 4개 부서를 VLAN 10~13으로 분리하고, 보안 강화를 위해 VLSM 기반 <code>/27</code> 서브넷팅(192.168.100~130.0/27, 부서당 가용 30호스트)을 적용. 스위치 트렁크 포트(802.1Q)와 라우터 서브인터페이스(ROAS), Voice VLAN을 연동하여 IP Phone 경유 업무용 PC의 데이터 트래픽(Ping 100%) 정상 도달을 확인.
           </li>
           <li>
-            <strong>화이트리스트 접근통제(ACL) 및 DMZ 구축 한계 분석:</strong> 외부 경계 라우터에 Extended ACL 정책을 구성하여 인가되지 않은 외부 트래픽의 사내망 접근을
-            필터링. 단, DMZ 서버의 경우 라우터 포트 부족과 인터페이스 설정 문제로 외부 포트포워딩 접속이 실패(Request Timeout)함을 확인하였으며, 이를 DMZ 전용 스위치 추가 증설 및
-            우회 연결 방안으로 분석해 기술 보고서에 정리.
+            <strong>화이트리스트 접근통제(ACL) 및 DMZ 포트포워딩 트러블슈팅 (100% 정상화):</strong> 외부 경계 라우터에 Extended ACL 정책으로 비인가 외부 트래픽을 차단하고, NAT Exemption(ACL 100 deny)으로 사내망 통신을 비암호화 변환 없이 VPN으로 유도. 특히 초기 DMZ 접속 실패(Request Timeout/Reset)를 심층 분석하여, 라우터 스위치 모듈(NIM-ES2-4)의 L2 제약을 극복하는 SVI(<code>interface Vlan1</code>, 게이트웨이 192.168.140.1 / 150.1)를 수립하고, 지사 DMZ 서버의 물리 NIC 포트 불일치(FastEthernet1 연결 포트 미할당)를 단계별로 교정하여 본사·지사 DMZ 웹(80)/텔넷(23) 포트포워딩 외부 접속 100% 정상화 달성.
           </li>
           <li>
-            <strong>HSRP 게이트웨이 이중화 설계:</strong> 본사·지사에 각각 주 라우터와 보조 라우터를 배치하고 HSRP(Priority 110/100, Preempt) 가상 게이트웨이를
-            구축. 주 라우터나 회선 장애 발생 시 보조 라우터가 게이트웨이 역할을 넘겨받아 통신이 유지되도록 자동 절체(Failover) 경로를 실측 검증.
+            <strong>HSRP 게이트웨이 무중단 이중화 실측:</strong> 본사·지사에 각각 주 라우터(Priority 110, Active)와 보조 라우터(Priority 100, Standby)에 HSRP 가상 게이트웨이(.1)를 구축하고 선점(preempt) 및 고속 감시 타이머(<code>standby timers 1 3</code>)를 적용. 주 라우터 다운 모의 시 3초 내 <code>Speak → Standby → Active</code>로 자동 승격되어 가상 MAC 및 VIP를 무중단 인계함을 실측 검증.
           </li>
           <li>
-            <strong>원격 지사 간 VPN 터널 구성:</strong> 공용 인터넷(ISP)을 경유하는 본사-지사 주 라우터 간에 IPsec VPN 터널을 수립. 지사 간 사내 업무 트래픽이 인터넷
-            구간에서도 주소 변환 없이 VPN 터널을 타고 이동하도록 경로를 확보하고 패킷 송수신 검증.
+            <strong>Site-to-Site IPsec VPN 다중 피어(Multi-Peer) 구성:</strong> 공용 인터넷(ISP)을 경유하는 본사-지사 주 라우터 간에 AES-128, SHA-HMAC, DH-Group 2 기반 IPsec VPN 터널을 수립하여 사내 업무 트래픽 암호화 보호. 주 회선(1.1.1.0/30, 2.2.2.0/30) 외에 인터넷 백업망(8.8.8.0/24)을 경유하는 HQ-back(8.8.8.11)과 Branch-back(8.8.8.22) 간 백업 터널(Seq 10)을 독립 구축하여 회선 다중화 경로 확보.
           </li>
           <li>
-            <strong>장애 경험을 통한 형상 관리 (우회 노선 및 VPN 꼬임 한계 분석):</strong> 메인 회선 장애 시 우회 노선이 체결되던 백업 파일에서 작업을 진행하다가, 설정이 꼬이자
-            라우터 설정을 전체 초기화 후 재세팅을 시도. 그러나 재세팅 후 우회 노선 체결 자체가 실패하고, 특히 VPN 터널이 맞물리며 라우팅 정책이 계속 꼬이는 난관을 경험. 무작정 초기화의 위험성을
-            깨닫고 검증된 베이스라인의 중요성을 체득했으며, 해결하지 못한 한계(VPN 정책 종속성 및 SA 비선점성)는 기술 분석 보고서에 정직하게 기록.
+            <strong>장애 절체(Failover) 심층 실측 및 시뮬레이터 한계 규명 (캡스톤 이후 연구):</strong> 메인 전면 장애 모의 시, 보조 라우터 간 1순위 백업 VPN 터널(Seq 10)을 통해 사내 트래픽이 백업 공인망(8.8.8.0/24)으로 정상 우회 절체(Failover 100% 성공)됨을 실측 확인. 단일 주 라우터 다운 시 발생하는 비대칭 통신 장애 및 SPI 불일치(<code>%CRYPTO-4-RECVD_PKT_INV_SPI</code>)를 추적하여, Packet Tracer 엔진의 DPD(Dead Peer Detection) 미지원으로 인한 구 SA 캐시 고착 현상을 네트워크 이론으로 규명. 실무 프로덕션을 위한 권장 아키텍처로 <code>BGP over IPsec (VTI)</code> 및 <code>DMVPN + IP SLA</code> 결합 방안을 제시.
           </li>
           <li>
-            <strong>단계별 핑(Ping) 실측 검증 (성공 및 실패 구간 분리):</strong> 각 구간별 통신 테스트 결과, [사내 PC 간 VPN 통신] 및 [내부 PC의 외부 인터넷(구글)
-            웹서핑]은 패킷 손실 0건(100% 도달)으로 정상 통신을 확인하였으나, [DMZ 서버 외부 접속]은 포트 매핑 실패(Timeout)로 확인하여 성공 구간과 실패 구간을 정직하게 분리하여
-            보고서에 반영.
+            <strong>전 구간 단계별 핑(Ping) 및 서비스 실측 검증 (100% 달성):</strong> [사내 PC 간 Site-to-Site VPN 통신(지속 Ping 무손실, 암·복호화 카운트 실측)], [내부 PC의 공인 구글 웹서핑(PAT 동적 변환 100% 성공)], [외부에서의 본사/지사 DMZ 웹 서버(80 포트포워딩) 양방향 TCP SYN-ACK 접속]까지 전 구간 무결점 동작 확인.
           </li>
         </ul>
         <div
@@ -612,15 +602,15 @@
 
             <!-- 4. DMZ 서버 정적 NAT 통신 검증 -->
             <div class="live-screen-card" data-src="assets/imagec3.png?v=2"
-              data-title="외부망(Google) - 본사 DMZ 서버 간 정적 NAT(포트포워딩) 통신 검증">
+              data-title="외부망(Google) - 본사/지사 DMZ 서버 간 정적 NAT(포트포워딩) 및 SVI 통신 검증">
               <div class="live-screen-thumb">
                 <img src="assets/imagec3.png?v=2" alt="DMZ 서버 정적 NAT 웹 통신 시뮬레이션">
-                <span class="live-badge live-badge-success">정적 NAT (포트포워딩)</span>
+                <span class="live-badge live-badge-success">정적 NAT (포트포워딩 100% 정상화)</span>
               </div>
               <div class="live-screen-body">
                 <div class="live-screen-title">DMZ 서버 정적 NAT 통신 검증</div>
                 <div class="live-screen-desc">
-                  외부(Google 8.8.8.8)에서 본사 공인 IP(1.1.1.1)를 통한 DMZ 웹서버(80) 요청 시 정적 NAT 역변환과 L2 스위칭을 거쳐 TCP SYN-ACK 양방향 통신 성공을 검증.
+                  외부(Google 8.8.8.8)에서 본사(1.1.1.1) 및 지사(2.2.2.1) 공인 IP로의 DMZ 웹서버(80)/텔넷(23) 요청 시 SVI(Vlan 1)와 L2 스위칭을 거쳐 TCP 양방향 통신 100% 성공 검증.
                 </div>
               </div>
             </div>
@@ -689,12 +679,12 @@
         3인(네트워크 1, 프론트엔드 1, 백엔드 1) 부트캠프 캡스톤 프로젝트에서 Packet Tracer를 활용한 네트워크 인프라 구축 전체를 전담했습니다. 개발 직군과의 원활한 연동을 위해 부서별 사내 표준 IP 대역(192.168.100~130.0/27)과 화이트리스트 접근통제 정책 목록을 꼼꼼히 문서화하여 개발 팀원에게 공유했습니다. 개발 팀원은 제가 설계한 사내망 정보를 바탕으로 서비스의 IP 접근 제어와 보안 모니터링 화면을 구현했습니다. 인프라 설계값과 정책 규칙을 사전에 명확히 문서화하여 공유함으로써 직군 간 오해 없이 개발과 네트워크 설정의 정합성을 맞췄습니다.
       </p>
       <p>
-        <span class="tag">[기업망 모사 인프라 구축 및 형상 관리]</span>
-        캡스톤에서 패킷트레이서를 활용해 본사-지사 4개 부서를 VLAN으로 분리하고 /27 서브넷 할당, Voice VLAN 연동, DMZ 포트포워딩 및 VPN 터널을 모사 구축했습니다. 장애 모의 훈련 중
-        초기에는 메인 회선 장애 시 우회 노선이 체결되도록 백업해 둔 구성 파일에서 작업을 진행했으나, 설정이 뜻대로 풀리지 않자 라우터 설정을 모두 지우고 처음부터 다시 세팅을 시도했습니다. 하지만 재세팅
-        후 오히려 잘 되던 우회 노선 체결 자체가 되지 않았고, 특히 VPN 터널 구성이 결합되는 순간부터 라우팅 경로와 암호화 정책이 계속 꼬이는 난관에 부딪혔습니다. 이 경험을 통해 운영망에서 무작정
-        설정을 초기화하고 재주입하는 행위의 위험성을 체감했고, 검증된 백업 베이스라인의 중요성과 VPN-라우팅 간 정책 종속성을 사전에 면밀히 설계해야 한다는 뼈저린 교훈을 얻었습니다. 끝내 해결하지 못한
-        복구 실패 원인은 기술 분석 보고서에 정직하게 기록했습니다.
+        <span class="tag">[기업망 모사 인프라 구축 및 한계 극복]</span>
+        캡스톤에서 패킷트레이서를 활용해 본사-지사 4개 부서를 VLAN으로 분리하고 /27 서브넷 할당, Voice VLAN 연동, DMZ 포트포워딩 및 VPN 터널을 모사 구축했습니다. 당시 장애 모의 훈련 중 메인 회선 장애 시 우회 노선 및 VPN 터널 정책 충돌, DMZ 포트포워딩 접속 실패라는 한계에 부딪혔고, 라우터 설정을 무작정 초기화했다가 오히려 설정이 더 꼬이는 난관을 겪었습니다. 당시에는 이 실패와 한계를 기술 분석 보고서에 정직하게 기록하고 마무리했으나, '왜 안 되었는가'를 온전히 해결하지 않고는 네트워크 엔지니어로서 납득할 수 없었습니다.
+      </p>
+      <p>
+        <span class="tag">[캡스톤 이후 심층 트러블슈팅과 완성]</span>
+        이에 캡스톤 종료 후 망 구조와 라우터 설정을 바닥부터 다시 분석했습니다. 먼저 DMZ 장애는 라우터 확장 모듈(NIM-ES2-4)의 L2 스위치 모드 특성을 파악하여 SVI(<code>interface Vlan1</code>) 게이트웨이를 수립하고, 서버의 다중 NIC 물리 포트 불일치(FastEthernet1 연결 포트 미할당)를 단계별로 추적·교정하여 본사·지사 외부 웹/텔넷 포트포워딩을 100% 정상화했습니다. 나아가 백업망(8.8.8.0/24)과 보조 라우터 간 1순위 백업 VPN 터널을 재설계하여 메인 회선 다운 시 백업 터널로의 정상 우회 절체(Failover)를 실측 성공시켰습니다. 단일 라우터 다운 시 발생하는 비대칭 통신 장애 역시 시뮬레이터 엔진의 DPD(Dead Peer Detection) 미지원으로 인한 SA 캐시 고착과 SPI 불일치(<code>%CRYPTO-4-RECVD_PKT_INV_SPI</code>)임을 규명하고, 실무 관점의 <code>BGP over IPsec (VTI)</code> 및 <code>IP SLA</code> 아키텍처 제언까지 도출했습니다. 실패에 머무르지 않고 끝까지 원인을 파고들어 완성형 고가용성 인프라로 증명해내는 엔지니어링 태도를 실천했습니다.
       </p>
     </section>
   </div>
